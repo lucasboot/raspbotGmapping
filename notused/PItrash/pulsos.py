@@ -41,7 +41,7 @@ def forwardDrive():
 	reverseLeft.value = 0.0
 
 def backwardDrive():
-	#print("Para trás")
+	#print("Para trs")
 	forwardRight.value = 0.0
 	reverseRight.value = 0.7
   	forwardLeft.value =  0.0
@@ -62,9 +62,10 @@ def reverseDDrive():
 	reverseLeft.value = 0.0
 
 def main():
-	if os.name != 'nt':
+    
+if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
-    print (msg)
+    
     while(1):
         key = getKey()
         if(key == 'w'):
@@ -73,11 +74,11 @@ def main():
 			reverseDrive()
         elif (key == 'e' ): 
 			reverseDDrive()
-		elif (key == 's' ): 
+	elif (key == 's' ): 
 			backwardDrive()
         else:
 	  		allStop()
-    if os.name != 'nt':
+if os.name != 'nt':
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 
 
