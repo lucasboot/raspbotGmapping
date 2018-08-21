@@ -52,7 +52,7 @@ cont1 = 0
 cont2 = 0
 allStop()
 try:
-	while (cont1 < 20 and cont2 < 20):
+	while (True):
     		forwardDrive()
 		if(gpio.input(20) == 1):
         		cont1 = cont1 + 1

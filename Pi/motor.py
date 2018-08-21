@@ -1,9 +1,6 @@
-
-from gpiozero import PWMOu tputDevice
+from gpiozero import PWMOutputDevice
 from time import sleep
-import rospy
 
-#///////////////// Definir os pinos dos motores /////////////////
 # Motor A, Left Side GPIO CONSTANTS
 PWM_FORWARD_LEFT_PIN = 26	# GPIO26- Pra frente
 PWM_REVERSE_LEFT_PIN = 19	# GPIO19 - Pra tras
@@ -11,8 +8,7 @@ PWM_REVERSE_LEFT_PIN = 19	# GPIO19 - Pra tras
 PWM_FORWARD_RIGHT_PIN = 6	# GPIO06 
 PWM_REVERSE_RIGHT_PIN = 13	# GPIO13 
 
-# Initialise objects for H-Bridge PWM pins
-# Inicializar o  duty cycle em 0 e a frequência em 1000
+
 forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
 reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
 
@@ -83,10 +79,7 @@ def reverseTurnRight():
   reverseRight.value = 0.2
 
 def main():
-  #allStop()
-  sub = rospy.Subscriber('distancia', Float64, direcao) #sub para alterar o valor enviado aos motores
-  
-  '''
+  allStop()
   forwardDrive()
   sleep(2)
   reverseDrive()
@@ -104,18 +97,8 @@ def main():
   reverseTurnRight()
   sleep(2)
   allStop()
-  '''
-
-def direcao(data):
-  if (data.data < 1):
-    reverseDrive()
-  else:
-    forwardDrive()
 
 if __name__ == "__main__":
-   try:
+   while(True):
         main()
-    except rospy.ROSInterruptException:
-        allStop()
-        pass
   
