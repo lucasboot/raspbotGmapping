@@ -56,13 +56,13 @@ def allStop():
 
 def forwardDrive():
 	#print("Para frente")
-	forwardRight.value =  0.0
+	forwardRight.value =  1.0
 	reverseRight.value = 0.0
 
 def reverseDrive():
 	#print("Girar para esquerda")
 	forwardRight.value = 0.0
-	reverseRight.value = 0.0
+	reverseRight.value = 1.0
 
 #Funcao da distancia com o ultrassom
 
