@@ -5,8 +5,7 @@
 <param name="map_frame" value="map"/>
 <param name="odom_frame" value="odom"/>
 
-<node pkg="tf" type="static_transform_publisher" name="base_link_to_base_laser_link" args="0 0 0.1 0 0 0 base_link base_scan 100"/>
-<node pkg="tf" type="static_transform_publisher" name="map_odom" args="0 0 0 0 0 1 map odom 100"/>
+<node pkg="tf" type="static_transform_publisher" name="ba
 <node pkg="rviz" type="rviz" name="rviz"/>
 <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
 <rosparam>
