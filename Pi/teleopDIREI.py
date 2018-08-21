@@ -34,7 +34,7 @@ def allStop():
 	#print("Parando")
 	forwardRight.value = 0
 	reverseRight.value = 0
-  forwardLeft.value = 0
+  	forwardLeft.value = 0
 	reverseLeft.value = 0
 
 
@@ -42,14 +42,14 @@ def forwardDrive():
 	#print("Para frente")
 	forwardRight.value = 1.0
 	reverseRight.value = 0.0
-  forwardLeft.value =  1.0
+  	forwardLeft.value =  1.0
 	reverseLeft.value = 0.0
 
 def reverseDrive():
 	#print("Girar para esquerda")
 	forwardRight.value = 1.0
 	reverseRight.value = 0.0
-  forwardLeft.value = 0.0
+  	forwardLeft.value = 0.0
 	reverseLeft.value = 1.0
 
 msg = """
@@ -98,7 +98,7 @@ cont2 = 0
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
-    print msg
+    print (msg)
     while(1):
         key = getKey()
         if key == 'w' :
