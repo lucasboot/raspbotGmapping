@@ -40,7 +40,7 @@ def allStop():
 
 def forwardDrive():
 	#print("Para frente")
-	forwardRight.value = 0.7
+	forwardRight.value = 0.65
 	reverseRight.value = 0.0
   	forwardLeft.value =  1.0
 	reverseLeft.value = 0.0
@@ -54,10 +54,10 @@ def backwardDrive():
 
 def reverseDrive():
 	#print("Girar para esquerda")
-	forwardRight.value = 1.0
+	forwardRight.value = 0.7
 	reverseRight.value = 0.0
   	forwardLeft.value = 0.0
-	reverseLeft.value = 1.0
+	reverseLeft.value = 0.7
 
 def reverseDDrive():
 	#print("Para frente")
@@ -112,7 +112,7 @@ cont2 = 0
 
 def parado () :
     allStop()
-	pub.publish(msg)
+    pub.publish(msg)
     pub2.publish(msg2)
 
 def parafrente(data):
@@ -122,7 +122,7 @@ def parafrente(data):
 	    reverseDrive()
     while (encoder1.value == 0):
 	    pub.publish(msg)
-        pub2.publish(msg2)
+            pub2.publish(msg2)
     global cont1
     global cont2
     if(data):
@@ -130,14 +130,14 @@ def parafrente(data):
         cont2 = cont2 + 1
     else:
 	    cont1 = cont1 -1
-        cont2 = cont2 +1 
+            cont2 = cont2 +1 
     msg.data = cont1
     pub.publish(msg)
     msg2.data = cont2
     pub2.publish(msg2)
     while(encoder1.value == 1):
 	    pub.publish(msg)
-        pub2.publish(msg2)
+            pub2.publish(msg2)
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
@@ -158,7 +158,8 @@ if __name__=="__main__":
                 key = getKey()
         elif (key == 's' ): 
           parado()
-
+	else:
+	  parado()
     if os.name != 'nt':
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 GPIO.cleanup()
