@@ -39,7 +39,9 @@ print("Min pulse width is set to 0.55 ms")
 #while True:
 start = time.time()
 cont = 0
+cont2 = 0
 for value in numpy.arange(3,17, 0.3):
+  cont2 = cont2 +1
   value2=(float(value)-10)/10 
   distance = tof.get_distance()
   if distance > 0:
@@ -50,6 +52,8 @@ for value in numpy.arange(3,17, 0.3):
   time.sleep(timing/1000000.00)
 print("Numero de leituras")
 print(cont)
+print("Execucoes:")
+print(cont2)
 #print(time.time() - start)
 tof.stop_ranging()
 tof.close()
