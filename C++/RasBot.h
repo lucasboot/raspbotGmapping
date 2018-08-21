@@ -10,10 +10,10 @@
 #define PRINT_DEBUG 
 
 //Default pins
-#define M_LF_PORT 0
-#define M_LB_PORT 1
-#define M_RF_PORT 2
-#define M_RB_PORT 3
+#define M_LF_PORT 11
+#define M_LB_PORT 12
+#define M_RF_PORT 13
+#define M_RB_PORT 26
 
 class RasBot{
 public:
