@@ -82,9 +82,10 @@ def main():
 	allStop()
 	sleep(3)
 	forwardDrive()
-	sleep(3)
+	sleep(10)
 	reverseDrive()
-	sleep(3)
+	sleep(10)
+'''
 	spinLeft()
 	sleep(3)
 	SpinRight()
@@ -97,7 +98,7 @@ def main():
 	sleep(3)
 	reverseTurnRight()
 	sleep(3)
-	
+'''	
 
 if __name__ == "__main__":
 	while(True):

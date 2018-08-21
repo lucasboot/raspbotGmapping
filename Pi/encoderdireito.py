@@ -12,7 +12,6 @@ pub2 = rospy.Publisher('giros', Int16, queue_size=1)
 encoder1 = DigitalInputDevice(21)
 cont1 = 0
 while True:
-        global giros = cont1
         start = time.time()
         while time.time() < start +5:
                 encoder1.wait_for_active()
