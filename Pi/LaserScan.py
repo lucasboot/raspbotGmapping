@@ -16,27 +16,27 @@ if __name__ == '__main__':
 		timing = 20000
 	print("Timing %d ms" % (timing/1000))
 	scan_pub = rospy.Publisher('scan', LaserScan, queue_size=1)
-	rate = rospy.Rate(1)  # rate para execucao dos comandos do ROS
+	rate = rospy.Rate(10)  # rate para execucao dos comandos do ROS
 	try:
 			while True:
-				num_readings = 10
+				num_readings = 67
 				laser_frequency = 40
 				scan_time = rospy.Time.now()
 				scan = LaserScan()
 				scan.header.stamp = scan_time
-				scan.header.frame_id = "laser_frame"
-				scan.angle_min = -1.57
-				scan.angle_max = 1.57
-				scan.angle_increment = 0.157075  # valor do incremento de cada 0.1 da lib gpiozero
+				scan.header.frame_id = "laser"
+				scan.angle_min = 0
+				scan.angle_max = 3.141592654
+				scan.angle_increment = 0.047123889  # valor do incremento de cada 0.1 da lib gpiozero
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 2.00
 				for i in range(0, num_readings, 1):
-					scan.ranges.append(tof.get_distance())
+					scan.ranges.append(tof.get_distance()/1000.0)
 					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)
 				scan_pub.publish(scan)
 	except rospy.ROSInterruptException:
 			GPIO.cleanup()
-		pass
+			pass
 	
