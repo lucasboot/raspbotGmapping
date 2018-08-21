@@ -23,7 +23,7 @@ def allStop():
 
 def forwardDrive():
 	#print("Para frente")
-	forwardRight.value = 0.8
+	forwardRight.value = 0.55
 	reverseRight.value = 0.0
 
 def reverseDrive():
