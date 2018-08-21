@@ -36,19 +36,18 @@ def allStop():
 def forwardDrive():
 	print("Para frente")
 	forwardLeft.value = 0.0
-	reverseLeft.value = 1.0
-	forwardRight.value = 1.0
+	reverseLeft.value = 0.5
+	forwardRight.value = 0.5
 	reverseRight.value = 0.0
 
 def spinLeft():
 	print("Girar para esquerda")
-	forwardLeft.value = 1.0
+	forwardLeft.value = 0
 	reverseLeft.value = 0
-	forwardRight.value = 0
-	reverseRight.value = 1.0
+	forwardRight.value = 0.8
+	reverseRight.value = 0
 
 def distance():
-	#metodo para calculo da distancia >
 	GPIO.output(GPIO_TRIGGER, True)
 	time.sleep(0.00001) #set trigger apos 0,01ms
 	GPIO.output(GPIO_TRIGGER, False)
@@ -60,15 +59,15 @@ def distance():
 		StopTime = time.time()
 	TimeElapsed = StopTime - StartTime
 	distance = (TimeElapsed*34300)/2 #formula para obtencao da distancia
-
 	return distance
 def main():
     dist = distance() #le o valor do ultrassom e coloca o valor na variavel dist
-	if(dist > 15):
+    print(dist)
+    if(dist > 20):
 		forwardDrive()
-	else:
+    else:
 		spinLeft()
-		sleep(4)
+		sleep(3)
 if __name__ == '__main__':
     while True:
         main()

@@ -39,15 +39,15 @@ if __name__ == '__main__':
 				scan.header.frame_id = "laser"
 				scan.angle_min = 0
 				scan.angle_max = 3.141592654
-				scan.angle_increment = 0.047123889  # valor do incremento de cada 0.1 da lib gpiozero
+				scan.angle_increment =0.01570758  # valor do incremento de cada 0.1 da lib gpiozero
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 2.00
 				value = 0
 				for i in range(0, num_readings, 1):
 					value2=(float(value)-10)/10 
-    				myServo.value=value2
-					value = valua + 0.1
+    					myServo.value=value2
+					value = value + 0.1
 					scan.ranges.append(tof.get_distance()/1000.0)
 					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)

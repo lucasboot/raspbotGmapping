@@ -54,7 +54,7 @@ while (value<=20):
     if distance > 0:
         #print("%d mm, %d cm, %d" % (distance, (distance/10), count))
         cont = cont + 1
-    value = value + 0.3
+    value = value + 0.1
     time.sleep(timing/1000000.00)
     
 print(str(cont) + " leituras realizadas")
