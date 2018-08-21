@@ -18,6 +18,7 @@ while True:
 		news = time.time()
 		while (encoder1.value == 0):
 			pub.publish(msg)
+			#print(msg.data)
                		if((news + 1)< time.time()):
                         	giros.data = 0.0
                         	pub2.publish(giros)
@@ -26,11 +27,13 @@ while True:
                 msg.data = cont1
                 pub.publish(msg)
 		news = time.time()
+		#print(cont1)
                 while(encoder1.value == 1):
 			pub.publish(msg)
+			#print(msg.data)
 
 			if((news + 1)< time.time()):
                                giros.data = 0.0
                                pub2.publish(giros) 
         giros.data =float(cont1 - inicio)/20.0
-pub2.publish(giros)
+	pub2.publish(giros)

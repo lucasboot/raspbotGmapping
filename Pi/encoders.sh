@@ -1,3 +1,3 @@
 #!/bin/bash 
 python coderdireito.py &
-python coderesquerdo.py 
+python coderesq.py 

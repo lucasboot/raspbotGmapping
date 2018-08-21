@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from gpiozero import DigitalInputDevice
+from gpiozero import PWMOutputDevice
 import rospy
 from std_msgs.msg import Int16
 from std_msgs.msg import Float32
@@ -69,25 +70,24 @@ def parafrente():
         start = time.time()
         giros = Float32()
         while time.time() < start +1:
-			news = time.time()
-			while (encoder1.value == 0):
-				pub.publish(msg)
-               		if((news + 1)< time.time()):
-                        	giros.data = 0.0
-                        	pub2.publish(giros)
+	    news = time.time()
+	    while (encoder1.value == 0):
+		pub.publish(msg)
+               	if((news + 1)< time.time()):
+                        giros.data = 0.0
+                        pub2.publish(giros)
             global cont1
             cont1 = cont1 +1
             msg.data = cont1
             pub.publish(msg)
-			news = time.time()
+	    news = time.time()
             while(encoder1.value == 1):
-				pub.publish(msg)
-
-			if((news + 1)< time.time()):
-                giros.data = 0.0
-                pub2.publish(giros) 
-        giros.data =float(cont1 - inicio)/20.0
-		pub2.publish(giros)
+		pub.publish(msg)
+		if((news + 1)< time.time()):
+                	giros.data = 0.0
+                	pub2.publish(giros) 
+            giros.data =float(cont1 - inicio)/20.0
+	    pub2.publish(giros)
 
 def paratras():
 	reverseDrive()
@@ -95,29 +95,29 @@ def paratras():
         start = time.time()
         giros = Float32()
         while time.time() < start +1:
-			news = time.time()
-			while (encoder1.value == 0):
-				pub.publish(msg)
-               		if((news + 1)< time.time()):
-                        	giros.data = 0.0
-                        	pub2.publish(giros)
+	    news = time.time()
+	    while (encoder1.value == 0):
+		pub.publish(msg)
+               	if((news + 1)< time.time()):
+                        giros.data = 0.0
+                        pub2.publish(giros)
             global cont1
             cont1 = cont1 -1
             msg.data = cont1
             pub.publish(msg)
-			news = time.time()
+	    news = time.time()
             while(encoder1.value == 1):
-				pub.publish(msg)
+		pub.publish(msg)
 
-			if((news + 1)< time.time()):
-                giros.data = 0.0
-                pub2.publish(giros) 
-        giros.data =float(cont1 - inicio)/20.0
-		pub2.publish(giros)
+		if((news + 1)< time.time()):
+                	giros.data = 0.0
+                	pub2.publish(giros) 
+            giros.data =float(cont1 - inicio)/20.0
+	    pub2.publish(giros)
 
 def main():
 	dist = distance()
-	if (dist < 20.0):
+	if (dist < 5.0):
 		paratras()
 	else:
 		parafrente()

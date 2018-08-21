@@ -21,8 +21,8 @@ def sigint_handler(signum, instant):
 signal.signal(signal.SIGINT, sigint_handler)
 
 # TRIG será conectado ao pino 18. ECHO ao pino 16.
-TRIG = 18
-ECHO = 16
+TRIG = 23
+ECHO = 24
 
 # Variáveis para auxiliar no controle do loop principal
 # sampling_rate: taxa de amostragem em Hz, isto é, em média,

@@ -34,17 +34,17 @@ def allStop():
 	reverseRight.value = 0
 
 def forwardDrive():
-	print("Para frente")
-	forwardLeft.value = 0.0
-	reverseLeft.value = 0.5
-	forwardRight.value = 0.5
+	#print("Para frente")
+	forwardLeft.value = 1.0
+	reverseLeft.value = 0.0
+	forwardRight.value = 1.0
 	reverseRight.value = 0.0
 
 def spinLeft():
-	print("Girar para esquerda")
+	#print("Girar para esquerda")
 	forwardLeft.value = 0
 	reverseLeft.value = 0
-	forwardRight.value = 0.8
+	forwardRight.value = 1.0
 	reverseRight.value = 0
 
 def distance():
@@ -62,12 +62,11 @@ def distance():
 	return distance
 def main():
     dist = distance() #le o valor do ultrassom e coloca o valor na variavel dist
-    print(dist)
-    if(dist > 20):
+    #print(dist)
+    if(dist > 45):
 		forwardDrive()
     else:
 		spinLeft()
-		sleep(3)
 if __name__ == '__main__':
     while True:
         main()

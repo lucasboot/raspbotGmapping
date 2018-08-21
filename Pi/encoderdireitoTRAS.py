@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from gpiozero import DigitalInputDevice
+from gpiozero import PWMOutputDevice
 import rospy
 from std_msgs.msg import Int16
 from std_msgs.msg import Float32
@@ -67,12 +68,7 @@ def parafrente():
         pub2.publish(giros)
 
 def main():
-	dist = distance()
-	if (dist < 20.0):
-		paratras()
-	else:
-		parafrente()
-
+    parafrente()
 if __name__ == '__main__':
     while True:
         main()
