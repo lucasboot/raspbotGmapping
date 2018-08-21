@@ -37,9 +37,9 @@ if __name__ == '__main__':
 				scan = LaserScan()
 				scan.header.stamp = scan_time
 				scan.header.frame_id = "laser"
-				scan.angle_min = 0
-				scan.angle_max = 3.141592654
-				scan.angle_increment =0.01570758  # valor do incremento de cada 0.1 da lib gpiozero
+				scan.angle_min = (math.pi*3)/20
+				scan.angle_max = (math.pi*17)/20
+				scan.angle_increment = (math.pi*0.3)/20  # valor do incremento de cada 0.1 da lib gpiozero
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 2.00
