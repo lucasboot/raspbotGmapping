@@ -11,13 +11,12 @@ import math
 #Configurando o servo motor
 
 #####################
-'''
 myGPIO=17 #5V e GND
 myCorrection=0.45
 maxPW=(2.0+myCorrection)/1000
 minPW=(1.0-myCorrection)/1000
 myServo = Servo(myGPIO,min_pulse_width=minPW,max_pulse_width=maxPW)
-'''
+
 #####################
 
 if __name__ == '__main__':
@@ -33,7 +32,7 @@ if __name__ == '__main__':
 	scan_pub = rospy.Publisher('scan', LaserScan, queue_size=1)
 	try:
 			while True:
-				num_readings = 15
+				num_readings = 47
 				laser_frequency = 16 #arquivo testando no Raspberry
 				scan_time = rospy.Time.now()
 				scan = LaserScan()
@@ -45,21 +44,21 @@ if __name__ == '__main__':
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 10.00
-				#value = 3.0
+				value = 3.0
 				print((scan.angle_max - scan.angle_min)/num_readings)
 				for i in range(0, num_readings, 1):
-					'''
+					
 					value2=(float(value)-10)/10.0 
     					myServo.value=value2
 					value = value + 0.3 # ((scan.angle_max - scan.angle_min)/num_readings)
-					'''
+					
 					scan.ranges.append(tof.get_distance()/1000.0)
 					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)
 				scan_pub.publish(scan)
-				#value = 3.0
-				#value2=(float(value)-10)/10.0 
-                                #myServo.value=value2 
+				value = 3.0
+				value2=(float(value)-10)/10.0 
+                                myServo.value=value2 
 				#print(value) 
 				sleep(0.000001)
 	except rospy.ROSInterruptException:

@@ -1,3 +1,3 @@
 #!/bin/bash 
-python codetesteesquerdo.py  &
-python codetestedireito.py 
+python cdesquerdo.py  &
+python cddireito.py 
