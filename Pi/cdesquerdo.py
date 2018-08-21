@@ -60,48 +60,50 @@ def reverseDrive():
 rospy.init_node('encoderEsquerdo', anonymous=True)
 msg = Int16()
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
-pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(20)
 cont1 = 0
 
 def parafrente(data):
-	if(data):
+    if(data):
     	forwardDrive()
-	else:
-		reverseDrive()
+    else:
+	reverseDrive()
     inicio  = cont1
-    #giros = Float32()
-	while (encoder1.value == 0):
-		pub.publish(msg)
-    global cont1
-	if(data):
-    	cont1 = cont1 +1
-	else:
-		cont1 = cont1 -1 
-	msg.data = cont1
+    while (encoder1.value == 0):
 	pub.publish(msg)
+    global cont1
+    if(data):
+    	cont1 = cont1 +1
+    else:
+	cont1 = cont1 -1 
+    msg.data = cont1
+    pub.publish(msg)
     while(encoder1.value == 1):
-		pub.publish(msg)
-	
+	pub.publish(msg)
 
 if __name__ == '__main__':
-	leituras = []
-	i = 0
+    leituras = []
+    i = 0
+    booleana = True
     while True:
-		dist = distance()
-		leituras.append(dist)
-		i = i +1
-		if(i==5):
-			leituras = sorted(leituras)
-        if (i < 5):
-			parafrente(True)
-		else if (leituras[2] < 15):
-			parafrente(False)
-			i = 0
-			del leituras[0:5]
-		else:
-			parafrente(True)
-			i=0
-			del leituras[0:5]
+	dist = distance()
+	leituras.append(dist)
+	i = i +1
+	if(i==9):
+		leituras = sorted(leituras)
+        if (i < 9):
+		parafrente(booleana)
+	elif (leituras[4] < 15):
+		print(leituras[4])
+		booleana = False
+		parafrente(booleana)
+		i = 0
+		del leituras[:]
+	else:
+		print(leituras)
+		booleana = True
+		parafrente(True)
+		i=0
+		del leituras[:]
 allStop()
 GPIO.cleanup()

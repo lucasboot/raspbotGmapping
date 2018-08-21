@@ -23,7 +23,7 @@ def allStop():
 
 def forwardDrive():
 	#print("Para frente")
-	forwardRight.value = 1.0
+	forwardRight.value = 0.54
 	reverseRight.value = 0.0
 
 def reverseDrive():
@@ -36,20 +36,19 @@ def reverseDrive():
 rospy.init_node('encoderDireito', anonymous=True)
 msg = Int16()
 pub = rospy.Publisher('rwheel', Int16, queue_size=1)
-pub2 = rospy.Publisher('girosr', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(21)
 cont1 = 0
 def parafrente():
     forwardDrive()
     inicio  = cont1
-	while (encoder1.value == 0):
-		pub.publish(msg)
+    while (encoder1.value == 0):
+	pub.publish(msg)
     global cont1
     cont1 = cont1 +1
-	msg.data = cont1
-	pub.publish(msg)
+    msg.data = cont1
+    pub.publish(msg)
     while(encoder1.value == 1):
-		pub.publish(msg)
+	pub.publish(msg)
 	
 def main():
     parafrente()
