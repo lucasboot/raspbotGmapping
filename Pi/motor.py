@@ -25,9 +25,9 @@ def allStop():
 def forwardDrive():
 	print("Para frente")
 	forwardLeft.value = 0.0
-	reverseLeft.value = 1.0
+	reverseLeft.value = 0.5
 	forwardRight.value = 0.0
-	reverseRight.value = 1.0
+	reverseRight.value = 0.5
 
 def reverseDrive():
 	print("Para tras")
@@ -81,7 +81,7 @@ def reverseTurnRight():
 def main():
 	allStop()
 	sleep(3)
-	forwardTurnRight()
+	forwardDrive()
 	sleep(20)
 '''
 	forwardDrive()

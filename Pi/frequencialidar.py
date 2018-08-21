@@ -15,7 +15,7 @@ if timing < 20000:
 print("Timing %d ms" % (timing/1000))
 start = time.time()
 cont = 0
-while time.time() < start +1:
+while time.time() < start +60:
     distance = tof.get_distance()
     if distance > 0:
         print(distance/10)
