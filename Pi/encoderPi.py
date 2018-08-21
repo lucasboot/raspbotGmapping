@@ -20,15 +20,15 @@ cont2 = 0
 
 while True:
 	if(gpio.input(20) == 1):
-        cont1 = cont1 + 1
-        msg1.data = cont1
-        pub1.publish(msg1)
-        print cont1
-    if (gpio.input(21) == 1):
-        cont2 = cont2 + 1
-        msg2.data = cont2
-        pub2.publish(msg2)
-        print cont2
+        	cont1 = cont1 + 1
+        	msg1.data = cont1
+        	pub1.publish(msg1)
+        	print cont1
+	if (gpio.input(21) == 1):
+        	cont2 = cont2 + 1
+        	msg2.data = cont2
+        	pub2.publish(msg2)
+        	print cont2
 	time.sleep(0.1)
 gpio.cleanup()
 exit()

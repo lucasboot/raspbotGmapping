@@ -5,7 +5,7 @@ import RPi.GPIO as gpio
 import time
 import rospy
 from std_msgs.msg import Int16
-from gpiozero import PWMOu tputDevice
+from gpiozero import PWMOutputDevice
 from time import sleep
 import rospy
 
@@ -34,9 +34,9 @@ def allStop():
 
 def forwardDrive():
   print("Para frente")
-  forwardLeft.value = 0.1
-  reverseLeft.value = 0
-  forwardRight.value = 0.1
+  forwardLeft.value = 0
+  reverseLeft.value = 0.8
+  forwardRight.value = 0.8
   reverseRight.value = 0
 
 rospy.init_node('encoders', anonymous=True)
@@ -50,20 +50,23 @@ msg1 = Int16()
 msg2 = Int16()
 cont1 = 0
 cont2 = 0
-
-while (cont1 < 310 or cont2 < 310:
-    forwardDrive()
-	if(gpio.input(20) == 1):
-        cont1 = cont1 + 1
-        msg1.data = cont1
-        pub1.publish(msg1)
-        print cont1
-    if (gpio.input(21) == 1):
-        cont2 = cont2 + 1
-        msg2.data = cont2
-        pub2.publish(msg2)
-        print cont2
-	time.sleep(0.1)
 allStop()
-gpio.cleanup()
-exit()
+try:
+	while (cont1 < 30 and cont2 < 30):
+    		forwardDrive()
+		if(gpio.input(20) == 1):
+        		cont1 = cont1 + 1
+        		msg1.data = cont1
+        		pub1.publish(msg1)
+        		print cont1
+		if (gpio.input(21) == 1):
+        		cont2 = cont2 + 1
+        		msg2.data = cont2
+        		pub2.publish(msg2)
+        		print cont2
+		time.sleep(0.1)
+except rospy.ROSInterruptException:	
+		allStop()
+		gpio.cleanup()
+		exit()
+		pass
