@@ -35,13 +35,13 @@ def allStop():
 
 def forwardDrive():
 	#print("Para frente")
-	forwardLeft.value = 0.0
-	reverseLeft.value = 1.0
+	forwardLeft.value = 1.0
+	reverseLeft.value = 0.0
 
 def reverseDrive():
 	#print("Girar para esquerda")
-	forwardLeft.value = 1.0
-	reverseLeft.value = 0.0
+	forwardLeft.value = 0.0
+	reverseLeft.value = 1.0
 
 #Funcao da distancia com o ultrassom
 def distance():
@@ -65,11 +65,11 @@ pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(20)
 cont1 = 0
 def parafrente(data):
-		if(data):
+	if(data):
 			forwardDrive()
-		else:
+	else:
 			reverseDrive()
-	    inicio  = cont1
+	inicio  = cont1
         start = time.time()
         giros = Float32()
         while time.time() < start +1:
@@ -93,7 +93,7 @@ def parafrente(data):
 						giros.data = 0.0
 						pub2.publish(giros) 
 				giros.data =float(cont1 - inicio)/20.0
-	    pub2.publish(giros)
+	pub2.publish(giros)
 '''
 def paratras():
 	reverseDrive()
