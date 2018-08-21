@@ -57,73 +57,26 @@ def distance():
 	TimeElapsed = StopTime - StartTime
 	distance = (TimeElapsed*34300)/2 #formula para obtencao da distancia
 	return distance
-
 rospy.init_node('encoderEsquerdo', anonymous=True)
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
-#pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(20)
-cont1 = 0
 def parafrente(data):
+	global cont1
 	if(data):
 		forwardDrive()
 	else:
 		reverseDrive()
-	inicio  = cont1
-	start = time.time()
-	#giros = Float32()
-	msg = Int16()
-	while time.time() < start +5:
-		news = time.time()
-		while (encoder1.value == 0):
-			pub.publish(msg)
-			if((news + 1)< time.time()):
-				#giros.data = 0.0
-				pub2.publish(giros)
-		global cont1
-		if(data):
-			cont1 = cont1 +1
-		else:
-			cont1 = cont1 -1
-		msg.data = cont1
+	msg = Int16()		
+	while (encoder1.value == 0):
 		pub.publish(msg)
-		news = time.time()
-		while(encoder1.value == 1):
-			pub.publish(msg)
-			'''
-			if((news + 1)< time.time()):
-				giros.data = 0.0
-				pub2.publish(giros) 
-		giros.data =float(cont1 - inicio)/20.0
-    
-	pub2.publish(giros)
-'''
-'''
-def paratras():
-	reverseDrive()
-	inicio  = cont1
-        start = time.time()
-        giros = Float32()
-        while time.time() < start +1:
-	    news = time.time()
-	    while (encoder1.value == 0):
+	if(data):
+		cont1 = cont1 +1
+	else:
+		cont1 = cont1 -1
+	msg.data = cont1
+	pub.publish(msg)
+	while(encoder1.value == 1):
 		pub.publish(msg)
-               	if((news + 1)< time.time()):
-                        giros.data = 0.0
-                        pub2.publish(giros)
-            global cont1
-            cont1 = cont1 -1
-            msg.data = cont1
-            pub.publish(msg)
-	    news = time.time()
-            while(encoder1.value == 1):
-		pub.publish(msg)
-
-		if((news + 1)< time.time()):
-                	giros.data = 0.0
-                	pub2.publish(giros) 
-            giros.data =float(cont1 - inicio)/20.0
-	    pub2.publish(giros)
-'''
 def main():
 	dist = distance()
 	print(dist)
@@ -133,11 +86,11 @@ def main():
 	else:
 		parafrente(True)
 		print("Para frente")
-	time.sleep(0.0001)
 if __name__ == '__main__':
     try:
 	while True:
-        main()
+        	main()
+		time.sleep(0.0001)
     except rospy.ROSInterruptException:
 		GPIO.cleanup()
 		allStop()
