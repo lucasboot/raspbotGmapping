@@ -102,7 +102,7 @@ if __name__ == '__main__':
 		leituras = sorted(leituras)
         if (i < 9):
 		parafrente(booleana)
-	elif (leituras[4] < 5):
+	elif (leituras[4] < 10):
 		print(leituras[4])
 		booleana = False
 		parafrente(booleana)
