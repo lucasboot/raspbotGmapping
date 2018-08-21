@@ -43,7 +43,7 @@ if __name__ == '__main__':
 				scan.angle_increment = (math.pi*0.3)/20  # valor do incremento de cada 0.1 da lib gpiozero
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
-				scan.range_max = 2.00
+				scan.range_max = 10.00
 				value = 3.0
 				print((scan.angle_max - scan.angle_min)/num_readings)
 				for i in range(0, num_readings, 1):

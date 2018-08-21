@@ -40,6 +40,9 @@ print("Min pulse width is set to 0.55 ms")
 start = time.time()
 cont = 0
 cont2 = 0
+#value = 3.0
+#value2 = (float(value)-10)/10.0
+#time.sleep(3)
 for value in numpy.arange(3,17, 0.3):
   cont2 = cont2 +1
   value2=(float(value)-10)/10 
