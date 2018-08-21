@@ -71,6 +71,7 @@ Control Your Raspbot!
 ---------------------------
 Moving around:
    q     w     
+         s
            
               
 
@@ -146,12 +147,16 @@ if __name__=="__main__":
         booleana = True
         
         if(key == 'w'):
-            booleana = True
-            parafrente(booleana)
-        elif (key = 'q'):
-            booleana = False
-            parafrente(booleana)
-        else: 
+            while (key != 's' and key != 'q'):
+                booleana = True
+                parafrente(booleana)
+                key = getKey()
+        elif (key == 'q'):
+            while (key != 's' and key != 'w'):
+                booleana = False
+                parafrente(booleana)
+                key = getKey()
+        elif (key == 's' ): 
           parado()
 
     if os.name != 'nt':
