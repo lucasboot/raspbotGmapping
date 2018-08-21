@@ -41,9 +41,9 @@ def forwardDrive(rpm1, rpm2):
   regular(rpm1, rpm2)
 
 def regular(rpmr, rpml):
-	while (rpm1 > rpm2):
+	while ((rpm1 > rpm2) and (rpm1 <=1 and rpm2<=1)):
 		forwardRight.value = forwardRight.value + 0.05
-	while (rpm2 > rpm1):
+	while ((rpm2 > rpm1) and (rpm1 <=1 and rpm2 <=1)):
 		reverseLeft.value = reverseLeft.value + 0.05
 
 
@@ -56,28 +56,27 @@ incre1 = 0
 incre2= 0
 cont2 = 0
 allStop()
-timeold = 0
-
+timeold = current_milli_time()
+rpm1 = 0
+rpm2 = 0
 try:
 	while True:
-		timeold = current_milli_time
-    	
+    		forwardDrive(rpm1, rpm2)
 		if(gpio.input(20) == 1):
         		cont1 = cont1 + 1
-				incre1 = incre1+1
+			incre1 = incre1+1
 		if (gpio.input(21) == 1):
         		cont2 = cont2 + 1
-				incre2 = incre2 + 1
-		if(current_milli_time - timeold >= 1000)
-				rpm1 = (60 * 1000 / 20 ) / (current_milli_time - timeold) * incre1
-				rpm2 = (60 * 1000 / 20 ) / (current_milli_time - timeold) * incre2
-				forwardDrive(rpm1, rpm2)
+			incre2 = incre2 + 1
+		if((current_milli_time() - timeold) >= 1000):
+				rpm1 = (60 * 1000 / 20 ) / (current_milli_time() - timeold) * incre1
+				rpm2 = (60 * 1000 / 20 ) / (current_milli_time() - timeold) * incre2
 				print rpm1
 				print rpm2
 				incre1 = 0
 				incre2=0
 		
-except rospy.ROSInterruptException:	
+except KeyboardInterrupt:	
 		allStop()
 		gpio.cleanup()
 		exit()
