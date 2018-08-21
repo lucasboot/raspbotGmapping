@@ -38,45 +38,45 @@ def reverseDrive():
 
 def spinLeft():
   print("Girar para esquerda")
+  forwardLeft.value = 1.0
+  reverseLeft.value = 0
+  forwardRight.value = 0
+  reverseRight.value = 1.0
+
+def SpinRight():
+  print("Girar para direita")
   forwardLeft.value = 0
   reverseLeft.value = 1.0
   forwardRight.value = 1.0
   reverseRight.value = 0
 
-def SpinRight():
-  print("Girar para direita")
-  forwardLeft.value = 1.0
-  reverseLeft.value = 0
-  forwardRight.value = 0 
-  reverseRight.value = 1.0
-
 def forwardTurnLeft():
   print("Noroeste")
+  forwardLeft.value = 
+  reverseLeft.value = 0.2
+  forwardRight.value = 
+  reverseRight.value = 0.8
+
+def forwardTurnRight():
+  print("Nordeste")
+  forwardLeft.value = 0
+  reverseLeft.value = 0.8
+  forwardRight.value = 0
+  reverseRight.value = 0.2
+
+def reverseTurnLeft():
+  print("Sudoeste")
   forwardLeft.value = 0.2
   reverseLeft.value = 0
   forwardRight.value = 0.8
   reverseRight.value = 0
 
-def forwardTurnRight():
-  print("Nordeste")
+def reverseTurnRight():
+  print("Sudeste")
   forwardLeft.value = 0.8
   reverseLeft.value = 0
   forwardRight.value = 0.2
   reverseRight.value = 0
-
-def reverseTurnLeft():
-  print("Sudoeste")
-  forwardLeft.value = 0
-  reverseLeft.value = 0.2
-  forwardRight.value = 0
-  reverseRight.value = 0.8
-
-def reverseTurnRight():
-  print("Sudeste")
-  forwardLeft.value = 0
-  reverseLeft.value = 0.8
-  forwardRight.value = 0
-  reverseRight.value = 0.2
 
 def main():
   allStop()
@@ -88,17 +88,17 @@ def main():
 '''
 '''
   spinLeft()
-  sleep(2)
+  sleep(6)
   SpinRight()
-  sleep(2)
+  sleep(6)
   forwardTurnLeft()
-  sleep(2)
+  sleep(6)
   forwardTurnRight()
-  sleep(2)
+  sleep(6)
   reverseTurnLeft()
-  sleep(2)
+  sleep(6)
   reverseTurnRight()
-  sleep(2)
+  sleep(6)
 '''
 
 if __name__ == "__main__":
