@@ -82,9 +82,7 @@ def main():
 	allStop()
 	sleep(3)
 	forwardDrive()
-	sleep(10)
-	reverseDrive()
-	sleep(10)
+	sleep(20)
 '''
 	spinLeft()
 	sleep(3)

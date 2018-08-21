@@ -24,6 +24,9 @@ def forwardDrive(valor):
 	reverseLeft.value =  0.0
 
 def main():
+	while True:
+		forwardDrive(1.0)
+'''
     arq = open("dados.txt", "w")
     cont = 0
     vet = []
@@ -44,7 +47,7 @@ def main():
     arq.close()
     for v in vet:
         print(v)
-
+'''
 
 
 if __name__ == "__main__":

@@ -1,13 +1,14 @@
 from gpiozero import DigitalInputDevice
 import rospy
 from std_msgs.msg import Int16
+from std_msgs.msg import Float32
 import time
 
 rospy.init_node('encoderEsquerdo', anonymous=True)
 msg = Int16()
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
-pub2 = rospy.Publisher('girosl', Int16, queue_size=1)
-encoder1 = DigitalInputDevice(21)
+pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
+encoder1 = DigitalInputDevice(20)
 cont1 = 0
 while True:
 	inicio  = cont1
@@ -21,7 +22,7 @@ while True:
                 pub.publish(msg)
                 while(encoder1.value == 1):
                         pub.publish(msg)  
-	giros = Int16()
+	giros = Float32()
 	#print (cont1 - inicio)
-        giros.data = cont1 - inicio
+        giros.data =float((cont1 - inicio))/20.0
         pub2.publish(giros)
