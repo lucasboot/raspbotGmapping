@@ -31,10 +31,9 @@ if __name__ == '__main__':
 		timing = 20000
 	print("Timing %d ms" % (timing/1000))
 	scan_pub = rospy.Publisher('scan', LaserScan, queue_size=1)
-	rate = rospy.Rate(10)  # rate para execucao dos comandos do ROS
 	try:
 			while True:
-				num_readings = 47
+				num_readings = 15
 				laser_frequency = 16 #arquivo testando no Raspberry
 				scan_time = rospy.Time.now()
 				scan = LaserScan()
