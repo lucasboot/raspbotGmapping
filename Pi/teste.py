@@ -90,18 +90,18 @@ def reverseTurnRight():
 def main():
     msg1 = Bool()
     msg2 = Bool()
-	allStop()
-	sleep(3)
-	forwardDrive()
+    allStop()
+    sleep(3)
+    forwardDrive()
     start = time.time()
-    while (start +20 < time.time()):
+    while (start +20 > time.time()):
             msg1.data = True
             msg2.data = True
             pub1.publish(msg1)
             pub2.publish(msg2)
     reverseDrive()
     start = time.time()
-    while (start +20 < time.time()):
+    while (start +20 > time.time()):
             msg1.data = False
             msg2.data = False
             pub1.publish(msg1)

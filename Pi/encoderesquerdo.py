@@ -6,7 +6,6 @@ from std_msgs.msg import Bool
 import time
 
 rospy.init_node('encoderEsquerdo', anonymous=True)
-msg = Int16()
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
 pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(21)
@@ -26,19 +25,21 @@ while True:
 		while (encoder1.value == 0):
                         news = time.time()
 			pub.publish(msg)
-                        if((news + 1)< time.time()):
-                                giros.data = 0.0
-                                pub2.publish(giros)
-                global cont1
+                        if((news + 1) < time.time()):
+                       		 giros.data = 0.0
+                               	 pub2.publish(giros)
+                
                 rospy.Subscriber('motorA', Bool, callback)
-                msg.data = cont1
+               	msg = Int16()
+		global cont1
+		msg.data = cont1
                 pub.publish(msg)
                 while(encoder1.value == 1):
-                        news = time.time()
-			pub.publish(msg)
+                       		news = time.time()
+				pub.publish(msg)
 
-                       if((news + 1 )< time.time()):
-                                giros.data = 0.0
-                                pub2.publish(giros) 
+                       		if((news + 1 )< time.time()):
+                                	giros.data = 0.0
+                                	pub2.publish(giros) 
         giros.data =float(cont1 - inicio)/20.0
         pub2.publish(giros)

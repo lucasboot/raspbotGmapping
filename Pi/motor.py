@@ -2,30 +2,30 @@ from gpiozero import PWMOutputDevice
 from time import sleep
 
 # Motor A, Left Side GPIO CONSTANTS
-#PWM_FORWARD_LEFT_PIN = 6	# GPIO26- Pra frente
-#PWM_REVERSE_LEFT_PIN = 13	# GPIO19 - Pra tras
+PWM_FORWARD_LEFT_PIN = 6	# GPIO26- Pra frente
+PWM_REVERSE_LEFT_PIN = 13	# GPIO19 - Pra tras
 # Motor B, Right Side GPIO CONSTANTS
 PWM_FORWARD_RIGHT_PIN = 26	# GPIO06 
 PWM_REVERSE_RIGHT_PIN = 19	# GPIO13 
 
 
-#forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
-#reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
+forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
+reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
 
 forwardRight = PWMOutputDevice(PWM_FORWARD_RIGHT_PIN, True, 0, 1000)
 reverseRight = PWMOutputDevice(PWM_REVERSE_RIGHT_PIN, True, 0, 1000)
 
 def allStop():
 	print("Parando")
-	#forwardLeft.value = 0
-	#reverseLeft.value = 0
+	forwardLeft.value = 0
+	reverseLeft.value = 0
 	forwardRight.value = 0
 	reverseRight.value = 0
 
 def forwardDrive():
 	print("Para frente")
-	#forwardLeft.value = 0.0
-	#reverseLeft.value = 1.0
+	forwardLeft.value = 0.0
+	reverseLeft.value = 1.0
 	forwardRight.value = 0.0
 	reverseRight.value = 1.0
 
@@ -81,9 +81,12 @@ def reverseTurnRight():
 def main():
 	allStop()
 	sleep(3)
-	forwardDrive()
+	forwardTurnRight()
 	sleep(20)
 '''
+	forwardDrive()
+	sleep(20)
+	sleep(3)
 	spinLeft()
 	sleep(3)
 	SpinRight()
@@ -96,8 +99,7 @@ def main():
 	sleep(3)
 	reverseTurnRight()
 	sleep(3)
-'''	
-
+'''
 if __name__ == "__main__":
 	while(True):
 		main()
