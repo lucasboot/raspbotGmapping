@@ -34,7 +34,7 @@ def allStop():
 	#print("Parando")
 	forwardRight.value = 0
 	reverseRight.value = 0
-  forwardLeft.value = 0
+  	forwardLeft.value = 0
 	reverseLeft.value = 0
 
 
@@ -42,28 +42,28 @@ def forwardDrive():
 	#print("Para frente")
 	forwardRight.value = 0.7
 	reverseRight.value = 0.0
-  forwardLeft.value =  1.0
+  	forwardLeft.value =  1.0
 	reverseLeft.value = 0.0
 
 def backwardDrive():
 	#print("Para frente")
 	forwardRight.value = 0.0
 	reverseRight.value = 0.7
-  forwardLeft.value =  0.0
+  	forwardLeft.value =  0.0
 	reverseLeft.value = 1.0
 
 def reverseDrive():
 	#print("Girar para esquerda")
 	forwardRight.value = 1.0
 	reverseRight.value = 0.0
-  forwardLeft.value = 0.0
+  	forwardLeft.value = 0.0
 	reverseLeft.value = 1.0
 
 def reverseDDrive():
 	#print("Para frente")
 	forwardRight.value = 0.0
 	reverseRight.value = 1.0
-  forwardLeft.value =  1.0
+  	forwardLeft.value =  1.0
 	reverseLeft.value = 0.0
 
 msg = """
@@ -114,30 +114,27 @@ if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
     print (msg)
-    while(1):
+    a = True
+    while(a):
         key = getKey()
         if key == 'w' :
-          forwardDrive()
+	  cd1 = encoder1.value
+	  cd2 = encoder2.value
+	  forwardDrive()
           global cont1
           global cont2
-          while (encoder1.value == 0 or encoder2.value == 0):
-	          pub.publish(msg)
-            pub2.publish(msg2)
           cont1 = cont1 +1
           cont2 = cont2 +1 
           msg.data = cont1
           msg2.data = cont2
           pub.publish(msg)
           pub2.publish(msg2)
-          while (encoder1.value == 1 or encoder2.value == 1):
-	          pub.publish(msg)
-            pub2.publish(msg2)
         elif key == 'q' :
           reverseDrive()
           global cont1
           global cont2
           while (encoder1.value == 0 or encoder2.value == 0):
-	          pub.publish(msg)
+	    pub.publish(msg)
             pub2.publish(msg2)
           cont1 = cont1 +1
           cont2 = cont2 -1 
@@ -147,14 +144,14 @@ if __name__=="__main__":
           pub2.publish(msg2)
           while (encoder1.value == 1 or encoder2.value == 1):
 	          pub.publish(msg)
-            pub2.publish(msg2)
+            	  pub2.publish(msg2)
         elif key == 'e' :
           reverseDDrive()
           global cont1
           global cont2
           while (encoder1.value == 0 or encoder2.value == 0):
 	          pub.publish(msg)
-            pub2.publish(msg2)
+            	  pub2.publish(msg2)
           cont1 = cont1 -1
           cont2 = cont2 +1 
           msg.data = cont1
@@ -163,14 +160,14 @@ if __name__=="__main__":
           pub2.publish(msg2)
           while (encoder1.value == 1 or encoder2.value == 1):
 	          pub.publish(msg)
-            pub2.publish(msg2)
+            	  pub2.publish(msg2)
         elif key == 's' :
           backwardDrive()
           global cont1
           global cont2
           while (encoder1.value == 0 or encoder2.value == 0):
 	          pub.publish(msg)
-            pub2.publish(msg2)
+            	  pub2.publish(msg2)
           cont1 = cont1 -1
           cont2 = cont2 -1 
           msg.data = cont1
@@ -179,7 +176,9 @@ if __name__=="__main__":
           pub2.publish(msg2)
           while (encoder1.value == 1 or encoder2.value == 1):
 	          pub.publish(msg)
-            pub2.publish(msg2)
+            	  pub2.publish(msg2)
+	elif key == 'l':
+		a = False
         else: #parado
           allStop()
           global cont1
