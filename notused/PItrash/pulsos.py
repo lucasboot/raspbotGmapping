@@ -9,7 +9,19 @@ if os.name == 'nt':
 else:
   import tty, termios
 
+def getKey():
+    if os.name == 'nt':
+      return msvcrt.getch()
 
+    tty.setraw(sys.stdin.fileno())
+    rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
+    if rlist:
+        key = sys.stdin.read(1)
+    else:
+        key = ''
+
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    return key
 # Motor A, Left Side GPIO CONSTANTS
 PWM_FORWARD_LEFT_PIN = 6	# GPIO06 
 PWM_REVERSE_LEFT_PIN = 13	# GPIO13 
@@ -62,14 +74,11 @@ def reverseDDrive():
 	reverseLeft.value = 0.0
 
 def main():
-    
-if os.name != 'nt':
-        settings = termios.tcgetattr(sys.stdin)
-    
+        
     while(1):
         key = getKey()
         if(key == 'w'):
-            forwardDrive()
+            		forwardDrive()
         elif (key == 'q'):
 			reverseDrive()
         elif (key == 'e' ): 
@@ -78,12 +87,12 @@ if os.name != 'nt':
 			backwardDrive()
         else:
 	  		allStop()
-if os.name != 'nt':
-        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
-
-
-
 if __name__ == "__main__":
+		
+		if os.name != 'nt':
+        		settings = termios.tcgetattr(sys.stdin)
 		main()
   
+		if os.name != 'nt':
+        		termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 GPIO.cleanup()
