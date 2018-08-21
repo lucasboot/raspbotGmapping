@@ -80,12 +80,10 @@ def reverseTurnRight():
 
 def main():
   allStop()
-'''
   forwardDrive()
   sleep(6)
   reverseDrive()
   sleep(6)
-'''
 '''
   spinLeft()
   sleep(6)
