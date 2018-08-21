@@ -15,20 +15,20 @@ while True:
         start = time.time()
         giros = Float32()
         while time.time() < start +3:
+		news = time.time()
 		while (encoder1.value == 0):
-                        news = time.time()
-			pub.publish(msg)
-                        if((news + 3 )== time.time):
+			pub3.publish(msg)
+                        if((news + 3 )< time.time()):
                                 giros.data = 0.0
                                 pub4.publish(giros)
                 global cont1
                 cont1 = cont1 +1
                 msg.data = cont1
                 pub3.publish(msg)
+		news=time.time()
                 while(encoder1.value == 1):
-                        news = time.time()
 			pub3.publish(msg)
-                        if((news + 3 )== time.time):
+                        if((news + 3 )< time.time()):
                                 giros.data = 0.0
                                 pub4.publish(giros)
         giros.data =float((cont1 - inicio))/20.0
