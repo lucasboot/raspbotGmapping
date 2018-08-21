@@ -52,52 +52,52 @@ def SpinRight():
 
 def forwardTurnLeft():
 	print("Noroeste")
-	forwardLeft.value = 
-	reverseLeft.value = 0.2
-	forwardRight.value = 
-	reverseRight.value = 0.8
+	forwardLeft.value = 0 
+	reverseLeft.value = 0.8
+	forwardRight.value =0
+	reverseRight.value = 1.0
 
 def forwardTurnRight():
 	print("Nordeste")
 	forwardLeft.value = 0
-	reverseLeft.value = 0.8
+	reverseLeft.value = 1.0
 	forwardRight.value = 0
-	reverseRight.value = 0.2
+	reverseRight.value = 0.8
 
 def reverseTurnLeft():
 	print("Sudoeste")
-	forwardLeft.value = 0.2
+	forwardLeft.value = 0.8
 	reverseLeft.value = 0
-	forwardRight.value = 0.8
+	forwardRight.value = 1.0
 	reverseRight.value = 0
 
 def reverseTurnRight():
 	print("Sudeste")
-	forwardLeft.value = 0.8
+	forwardLeft.value = 1.0
 	reverseLeft.value = 0
-	forwardRight.value = 0.2
+	forwardRight.value = 0.8
 	reverseRight.value = 0
 
 def main():
 	allStop()
+	sleep(3)
 	forwardDrive()
-	sleep(6)
+	sleep(3)
 	reverseDrive()
-	sleep(6)
-	'''
+	sleep(3)
 	spinLeft()
-	sleep(6)
+	sleep(3)
 	SpinRight()
-	sleep(6)
+	sleep(3)
 	forwardTurnLeft()
-	sleep(6)
+	sleep(3)
 	forwardTurnRight()
-	sleep(6)
+	sleep(3)
 	reverseTurnLeft()
-	sleep(6)
+	sleep(3)
 	reverseTurnRight()
-	sleep(6)
-	'''
+	sleep(3)
+	
 
 if __name__ == "__main__":
 	while(True):
