@@ -34,6 +34,7 @@ if __name__ == '__main__':
 		while True:
 			dist = distance() #le o valor do ultrassom e coloca o valor na variavel dist
 			pub.publish(dist) #publica a distancia no topico distancia
+			time.sleep(0.0001)
 	except rospy.ROSInterruptException:
 		print("finalizado")
 		GPIO.cleanup()

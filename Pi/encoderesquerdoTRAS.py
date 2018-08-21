@@ -66,7 +66,6 @@ encoder1 = DigitalInputDevice(20)
 cont1 = 0
 def parafrente(data):
 	if(data):
-<<<<<<< HEAD
 		forwardDrive()
 	else:
 		reverseDrive()
@@ -94,35 +93,7 @@ def parafrente(data):
 				giros.data = 0.0
 				pub2.publish(giros) 
 		giros.data =float(cont1 - inicio)/20.0
-=======
-			forwardDrive()
-	else:
-			reverseDrive()
-	inicio  = cont1
-        start = time.time()
-        giros = Float32()
-        while time.time() < start +1:
-			news = time.time()
-			while (encoder1.value == 0):
-				pub.publish(msg)
-				if((news + 1)< time.time()):
-					giros.data = 0.0
-					pub2.publish(giros)
-				global cont1
-				if(data):
-					cont1 = cont1 +1
-				else:
-					cont1 = cont1 -1
-				msg.data = cont1
-				pub.publish(msg)
-				news = time.time()
-				while(encoder1.value == 1):
-					pub.publish(msg)
-					if((news + 1)< time.time()):
-						giros.data = 0.0
-						pub2.publish(giros) 
-				giros.data =float(cont1 - inicio)/20.0
->>>>>>> 49abc3dbbabe126d7b5a017c7666d9a8f34f1f9c
+    
 	pub2.publish(giros)
 '''
 def paratras():
@@ -153,13 +124,19 @@ def paratras():
 '''
 def main():
 	dist = distance()
+	print(dist)
 	if (dist < 20.0):
 		parafrente(False)
+		print("Gira")
 	else:
 		parafrente(True)
-
+		print("Para frente")
+	time.sleep(0.0001)
 if __name__ == '__main__':
-    while True:
-        main()
-allStop()
-GPIO.cleanup()
+    try:
+	while True:
+        	main()
+    except rospy.ROSInterruptException:
+	GPIO.cleanup()
+	allStop()
+    pass
