@@ -8,7 +8,7 @@ rospy.init_node('encoderEsquerdo', anonymous=True)
 msg = Int16()
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
 pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
-encoder1 = DigitalInputDevice(21)
+encoder1 = DigitalInputDevice(20)
 cont1 = 0
 while True:
 	inicio  = cont1

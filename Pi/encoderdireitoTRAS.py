@@ -37,7 +37,7 @@ rospy.init_node('encoderDireito', anonymous=True)
 msg = Int16()
 pub = rospy.Publisher('rwheel', Int16, queue_size=1)
 pub2 = rospy.Publisher('girosr', Float32, queue_size=1)
-encoder1 = DigitalInputDevice(20)
+encoder1 = DigitalInputDevice(21)
 cont1 = 0
 def parafrente():
 	forwardDrive()
