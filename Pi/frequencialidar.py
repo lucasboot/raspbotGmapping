@@ -20,7 +20,7 @@ while time.time() < start +1:
     if distance > 0:
         print(distance/10)
         cont = cont + 1
-    time.sleep(timing/1000000.00)
+        time.sleep(timing/1000000.00)
 print (cont)
 tof.stop_ranging()
 tof.close()
