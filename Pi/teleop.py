@@ -156,8 +156,6 @@ if __name__=="__main__":
                 booleana = False
                 parafrente(booleana)
                 key = getKey()
-        elif (key == 's' ): 
-          parado()
 	else:
 	  parado()
     if os.name != 'nt':
