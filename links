@@ -4,12 +4,26 @@ http://codelectron.com/measure-distance-ultrasonic-sensor-pi-hc-sr04/
 - Github de William:
 https://github.com/WKossmann/RasBot/tree/master/v.1.1(on%20work)
 
+
 - Dois motores DC:
 https://business.tutsplus.com/tutorials/controlling-dc-motors-using-python-with-a-raspberry-pi--cms-20051
 
+https://www.bananarobotics.com/shop/HG7881-%28L9110%29-Dual-Channel-Motor-Driver-Module
+
+http://diyprojects.eu/how-to-use-h-bridge-hg7881-with-external-power-supply-and-arduino/
+
+https://www.bluetin.io/python/gpio-pwm-raspberry-pi-h-bridge-dc-motor-control/
+
+http://blog.baudaeletronica.com.br/raspberry-pi-3-com-ponte-h-controle-motor-dc/
 
 
-IP: 
+- Biblioteca:
+https://gpiozero.readthedocs.io/en/stable/installing.html
+
+
+IP:
+sudo service ssh start
+ssh pi@10.6.4.115
 10.6.4.115
 
 Date changer:
