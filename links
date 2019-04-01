@@ -7,3 +7,10 @@ https://github.com/WKossmann/RasBot/tree/master/v.1.1(on%20work)
 - Dois motores DC:
 https://business.tutsplus.com/tutorials/controlling-dc-motors-using-python-with-a-raspberry-pi--cms-20051
 
+
+
+IP: 
+10.6.4.115
+
+Date changer:
+sudo date --set "25 Sep 2013 15:00:00"
