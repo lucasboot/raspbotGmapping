@@ -5,7 +5,7 @@ from time import sleep
 #///////////////// Definir os pinos dos motores /////////////////
 # Motor A, Left Side GPIO CONSTANTS
 PWM_FORWARD_LEFT_PIN = 26	# IN1 - Pra frente
-PWM_REVERSE_LEFT_PIN = 19	# IN2 - Pra trás
+PWM_REVERSE_LEFT_PIN = 19	# IN2 - Pra tras
 # Motor B, Right Side GPIO CONSTANTS
 PWM_FORWARD_RIGHT_PIN = 6	# IN1 
 PWM_REVERSE_RIGHT_PIN = 13	# IN2  
@@ -84,21 +84,21 @@ def reverseTurnRight():
 def main():
   allStop()
   forwardDrive()
-  sleep(7)
+  sleep(2)
   reverseDrive()
-  sleep(7)
+  sleep(2)
   spinLeft()
-  sleep(7)
+  sleep(2)
   SpinRight()
-  sleep(7)
+  sleep(2)
   forwardTurnLeft()
-  sleep(7)
+  sleep(2)
   forwardTurnRight()
-  sleep(7)
+  sleep(2)
   reverseTurnLeft()
-  sleep(7)
+  sleep(2)
   reverseTurnRight()
-  sleep(7)
+  sleep(2)
   allStop()
 
 
