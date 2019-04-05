@@ -1,22 +1,27 @@
-/**
- * H-bridge module HG7881CP/HG7881CP example code
- * http://diyprojects.eu/how-to-use-h-bridge-hg7881-with-external-power-supply-and-arduino
- */
-
-/**
- * Create variables to be used to run motor A
- */
 import RPi.GPIO as GPIO
 from time import sleep
-Motor1A = 16 //Raspberry digital 8 is connected to HG7881's A-1A terminal
-Motor1B = 18 //Raspberry digital 18 is connected to HG7881's A-1B terminal
+
+
+GPIO.setmode(GPIO.BOARD)
+
+Motor1A = 21 
+Motor1B = 19 
+
+Motor2A = 24
+Motor2B = 26
 
 GPIO.setup(Motor1A,GPIO.OUT)
 GPIO.setup(Motor1B,GPIO.OUT)
 
+GPIO.setup(Motor2A,GPIO.OUT)
+GPIO.setup(Motor2B,GPIO.OUT)    
+
 print ("Para frente")
 GPIO.output(Motor1A,GPIO.HIGH)
 GPIO.output(Motor1B,GPIO.LOW)
+
+GPIO.output(Motor2A,GPIO.LOW)
+GPIO.output(Motor2B,GPIO.HIGH)
 
 sleep(5)
 
@@ -24,10 +29,15 @@ print ("Para tras")
 GPIO.output(Motor1A,GPIO.LOW)
 GPIO.output(Motor1B,GPIO.HIGH)
 
+GPIO.output(Motor2A,GPIO.HIGH)
+GPIO.output(Motor2B,GPIO.LOW)
+
 sleep (5)
 
 print("Parando...")
 GPIO.output(Motor1A, GPIO.LOW)
 GPIO.output(Motor1B, GPIO.LOW)
+GPIO.output(Motor2A,GPIO.LOW)
+GPIO.output(Motor2B,GPIO.LOW)
 GPIO.cleanup()
-sleep(10)
+sleep(2)
