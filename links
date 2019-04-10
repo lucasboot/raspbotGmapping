@@ -21,6 +21,10 @@ http://blog.baudaeletronica.com.br/raspberry-pi-3-com-ponte-h-controle-motor-dc/
 
 https://www.myelectronicslab.com/wp-content/uploads/2016/06/raspbery-pi-3-gpio-pinout-40-pin-header-block-connector-.png
 
+-Fontes para a aplicação do GMapping:
+https://github.com/tsbertalan/gunnar
+https://github.com/ros-perception/slam_gmapping/tree/hydro-devel/gmapping
+http://emanual.robotis.com/docs/en/platform/turtlebot3/slam/#run-slam-nodes
 
 - Biblioteca:
 https://gpiozero.readthedocs.io/en/stable/installing.html
