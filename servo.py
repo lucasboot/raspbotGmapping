@@ -1,13 +1,14 @@
 #pin 03 do rasp, ligar no pino 5V dele (primeiro da borda)
 import RPi.GPIO as GPIO
 import time
-
+'''comandos para configurar as portas dos motores'''
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(03, GPIO.OUT) 
 pwm = GPIO.PWM(03, 50)
 pwm.start(0.0)
 GPIO.setwarnings(False)
 
+'''comportamento'''
 try:
     while True:
         pwm.ChangeDutyCycle(2.5) 

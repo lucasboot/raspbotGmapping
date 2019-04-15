@@ -21,7 +21,6 @@ def distance():
 		StartTime = time.time()
 	while GPIO.input(GPIO_ECHO) == 1:
 		StopTime = time.time()
-
 	TimeElapsed = StopTime - StartTime
 	distance = (TimeElapsed*34300)/2 #formula para obtencao da distancia
 

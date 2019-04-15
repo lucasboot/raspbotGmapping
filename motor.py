@@ -1,5 +1,5 @@
 
-from gpiozero import PWMOutputDevice
+from gpiozero import PWMOu tputDevice
 from time import sleep
 import rospy
 
@@ -84,7 +84,8 @@ def reverseTurnRight():
 
 def main():
   #allStop()
-  sub = rospy.Subscriber('distancia', Float64, direcao)
+  sub = rospy.Subscriber('distancia', Float64, direcao) #sub para alterar o valor enviado aos motores
+  
   '''
   forwardDrive()
   sleep(2)
@@ -106,7 +107,7 @@ def main():
   '''
 
 def direcao(data):
-  if (data.data < 7):
+  if (data.data < 1):
     reverseDrive()
   else:
     forwardDrive()

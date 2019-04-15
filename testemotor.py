@@ -1,3 +1,5 @@
+#código para testar o comportamento dos motores a partir da biblioteca GPIOZero
+
 from gpiozero import PWMOutputDevice
 from time import sleep
 
