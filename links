@@ -1,8 +1,15 @@
 - Link para o ultrassom com o Raspberry:
 http://codelectron.com/measure-distance-ultrasonic-sensor-pi-hc-sr04/
 
-- Github de William:
-https://github.com/WKossmann/RasBot/tree/master/v.1.1(on%20work)
+- Tópicos para o SLAM:
+LaserScan: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
+Odom: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom
+
+
+
+- Githubs:
+William: https://github.com/WKossmann/RasBot/tree/master/v.1.1(on%20work)
+Orivaldo: https://github.com/lar-ect/URA/blob/master/versao%204/codigos/arduino/devs/ControleGiros
 
 
 - Dois motores DC:
@@ -29,6 +36,11 @@ http://emanual.robotis.com/docs/en/platform/turtlebot3/slam/#run-slam-nodes
 - Biblioteca:
 https://gpiozero.readthedocs.io/en/stable/installing.html
 
+Odometria:
+- https://github.com/fiorano10/phidgets/blob/master/src/odometry.cpp
+- https://answers.ros.org/question/271254/how-to-calculate-odometry-using-encoders/
+
+
 
 IP:
 sudo service ssh start
@@ -37,3 +49,7 @@ ssh pi@10.6.4.115
 
 Date changer:
 sudo date --set "25 Sep 2013 15:00:00"
+
+ROSserial:
+rosrun rosserial_python serial_node.py /dev/ttyACM0
+

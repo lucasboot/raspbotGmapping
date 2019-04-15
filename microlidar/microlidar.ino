@@ -12,12 +12,9 @@ std_msgs::Float64 strr_msg;
 ros::Publisher microlidar("distancia", &strr_msg);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   lidar.initNode();
   lidar.advertise(microlidar);
-
-  // wait until serial port opens for native USB devices
-  // power 
 }
 
 
@@ -27,7 +24,8 @@ void loop() {
   if (measure.RangeStatus != 4) {  
     strr_msg.data = measure.RangeMilliMeter;
     microlidar.publish(&strr_msg);
-  
+    
   }
   lidar.spinOnce();
+  delay(100);
 }
