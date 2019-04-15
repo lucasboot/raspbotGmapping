@@ -1,43 +1,104 @@
-import RPi.GPIO as GPIO
+from gpiozero import PWMOutputDevice
 from time import sleep
 
+#///////////////// Definir os pinos dos motores /////////////////
+# Motor A, Left Side GPIO CONSTANTS
+PWM_FORWARD_LEFT_PIN = 26       # IN1 - Pra frente
+PWM_REVERSE_LEFT_PIN = 19       # IN2 - Pra tras
+# Motor B, Right Side GPIO CONSTANTS
+PWM_FORWARD_RIGHT_PIN = 6       # IN1 
+PWM_REVERSE_RIGHT_PIN = 13      # IN2  
 
-GPIO.setmode(GPIO.BOARD)
+# Initialise objects for H-Bridge PWM pins
+# Inicializar o  duty cycle em 0 e a frequencia em 1000
+forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
+reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
 
-Motor1A = 21 
-Motor1B = 19 
+forwardRight = PWMOutputDevice(PWM_FORWARD_RIGHT_PIN, True, 0, 1000)
+reverseRight = PWMOutputDevice(PWM_REVERSE_RIGHT_PIN, True, 0, 1000)
 
-Motor2A = 24
-Motor2B = 26
+def allStop():
+  print("Parando")
+  forwardLeft.value = 0
+  reverseLeft.value = 0
+  forwardRight.value = 0
+  reverseRight.value = 0
 
-GPIO.setup(Motor1A,GPIO.OUT)
-GPIO.setup(Motor1B,GPIO.OUT)
+def forwardDrive():
+  print("Para frente")
+  forwardLeft.value =  0.5
+  reverseLeft.value = 0
+  forwardRight.value = 0.5
+  reverseRight.value = 0
 
-GPIO.setup(Motor2A,GPIO.OUT)
-GPIO.setup(Motor2B,GPIO.OUT)    
+def reverseDrive():
+  print("Para tras")
+  forwardLeft.value = 0
+  reverseLeft.value = 0.5
+  forwardRight.value = 0
+  reverseRight.value = 0.5
 
-print ("Para frente")
-GPIO.output(Motor1A,GPIO.HIGH)
-GPIO.output(Motor1B,GPIO.LOW)
+def spinLeft():
+  print("Girar para esquerda")
+  forwardLeft.value = 0
+  reverseLeft.value = 0.5
+  forwardRight.value = 0.5
+  reverseRight.value = 0
 
-GPIO.output(Motor2A,GPIO.LOW)
-GPIO.output(Motor2B,GPIO.HIGH)
+def SpinRight():
+  print("Girar para direita")
+  forwardLeft.value = 0.5
+  reverseLeft.value = 0
+  forwardRight.value = 0 
+  reverseRight.value = 0.5
 
-sleep(5)
+def forwardTurnLeft():
+  print("Noroeste")
+  forwardLeft.value = 0.2
+  reverseLeft.value = 0
+  forwardRight.value = 0.5 #0.8
+  reverseRight.value = 0
 
-print ("Para tras")
-GPIO.output(Motor1A,GPIO.LOW)
-GPIO.output(Motor1B,GPIO.HIGH)
+def forwardTurnRight():
+  print("Nordeste")
+  forwardLeft.value = 0.5 #0.8
+  reverseLeft.value = 0
+  forwardRight.value = 0.2
+  reverseRight.value = 0
 
-GPIO.output(Motor2A,GPIO.HIGH)
-GPIO.output(Motor2B,GPIO.LOW)
+def reverseTurnLeft():
+  print("Sudoeste")
+  forwardLeft.value = 0
+  reverseLeft.value = 0.2
+  forwardRight.value = 0
+  reverseRight.value = 0.5 #0.8
 
-sleep (5)
+def reverseTurnRight():
+  print("Sudeste")
+  forwardLeft.value = 0
+  reverseLeft.value = 0.5 #0.8
+  forwardRight.value = 0
+  reverseRight.value = 0.2
 
-print("Parando...")
-GPIO.output(Motor1A, GPIO.LOW)
-GPIO.output(Motor1B, GPIO.LOW)
-GPIO.output(Motor2A,GPIO.LOW)
-GPIO.output(Motor2B,GPIO.LOW)
-GPIO.cleanup()
-sleep(2)
+def main():
+  allStop()
+  forwardDrive()
+  sleep(2)
+  reverseDrive()
+  sleep(2)
+  spinLeft()
+  sleep(2)
+  SpinRight()
+  sleep(2)
+  forwardTurnLeft()
+  sleep(2)
+  forwardTurnRight()
+  sleep(2)
+  reverseTurnLeft()
+  sleep(2)
+  reverseTurnRight()
+  sleep(2)
+  allStop()
+
+if __name__ == "__main__":
+  main()
