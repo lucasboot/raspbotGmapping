@@ -31,10 +31,10 @@ void loop() {
   scan.header.frame_id = "laser_frame";
   scan.angle_min = -1.57;
   scan.angle_max = 1.57;
-  scan.angle_increment = 3.14/num_readings;
+  scan.angle_increment = 0.174532; //valor do incremento de cada 0.1 da lib gpiozero
   scan.time_increment = (1/laser_frequency) / (num_readings);
   scan.range_min = 0.05;
-  scan.range_max = 3.8;
+  scan.range_max = 3.80;
 
   for (unsigned int i = 0; i< num_readings; i++){
     VL53L0X_RangingMeasurementData_t measure;
