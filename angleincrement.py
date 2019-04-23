@@ -10,15 +10,9 @@
 #--------------------------------------
 from gpiozero import Servo
 from time import sleep
+import numpy
 
 myGPIO=17 #5V e GND
-
-# Min and Max pulse widths converted into milliseconds
-# To increase range of movement:
-#   increase maxPW from default of 2.0
-#   decrease minPW from default of 1.0
-# Change myCorrection using increments of 0.05 and
-# check the value works with your servo.
 myCorrection=0.45
 maxPW=(2.0+myCorrection)/1000
 minPW=(1.0-myCorrection)/1000
@@ -31,9 +25,11 @@ print("Min pulse width is set to 0.55 ms")
 
 while True:
 
-  print("Set value range -1.0 to +1.0")
-  for value in range(0,19):
-    value2=(float(value)-10)/10 #incremento de 0,174532rad por execução
+  for value in numpy.arange(0,20, 0.1):
+    value2=(float(value)-10)/10 
     myServo.value=value2
     print("Servo value set to "+str(value2))
-    sleep(1)
+    sleep (0.1)
+  
+
+
