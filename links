@@ -41,6 +41,7 @@ https://gpiozero.readthedocs.io/en/stable/installing.html
 Odometria:
 - https://github.com/fiorano10/phidgets/blob/master/src/odometry.cpp
 - https://answers.ros.org/question/271254/how-to-calculate-odometry-using-encoders/
+- https://github.com/agnunez/espros
 
 Navegação:
 - OBSAV: 
@@ -62,5 +63,5 @@ Date changer:
 sudo date --set "25 Sep 2013 15:00:00"
 
 ROSserial:
-rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=9600
+rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
 
