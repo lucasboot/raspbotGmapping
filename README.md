@@ -1,0 +1,68 @@
+# raspbotGmapping
+GMapping application with low-budget hardware
+- Link para o ultrassom com o Raspberry:
+http://codelectron.com/measure-distance-ultrasonic-sensor-pi-hc-sr04/
+
+- Tópicos para o SLAM:
+LaserScan: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
+Odom: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom | http://docs.ros.org/kinetic/api/nav_msgs/html/msg/Odometry.html 
+http://docs.ros.org/kinetic/api/nav_msgs/html/msg/Odometry.html
+
+- Comunicação com o Arduino:
+Rasp+Ard: https://oscarliang.com/raspberry-pi-and-arduino-connected-serial-gpio/
+
+- Githubs:
+William: https://github.com/WKossmann/RasBot/tree/master/v.1.1(on%20work)
+Orivaldo: https://github.com/lar-ect/URA/blob/master/versao%204/codigos/arduino/devs/ControleGiros
+
+
+- Dois motores DC:
+https://business.tutsplus.com/tutorials/controlling-dc-motors-using-python-with-a-raspberry-pi--cms-20051
+
+https://www.bananarobotics.com/shop/HG7881-%28L9110%29-Dual-Channel-Motor-Driver-Module
+
+http://diyprojects.eu/how-to-use-h-bridge-hg7881-with-external-power-supply-and-arduino/
+
+https://www.bluetin.io/python/gpio-pwm-raspberry-pi-h-bridge-dc-motor-control/
+
+http://blog.baudaeletronica.com.br/raspberry-pi-3-com-ponte-h-controle-motor-dc/
+
+
+- Pins do Rasp3:
+
+https://www.myelectronicslab.com/wp-content/uploads/2016/06/raspbery-pi-3-gpio-pinout-40-pin-header-block-connector-.png
+
+- Fontes para a aplicação do GMapping:
+https://github.com/tsbertalan/gunnar
+https://github.com/ros-perception/slam_gmapping/tree/hydro-devel/gmapping
+http://emanual.robotis.com/docs/en/platform/turtlebot3/slam/#run-slam-nodes
+
+- Biblioteca dos motores:
+https://gpiozero.readthedocs.io/en/stable/installing.html
+
+Odometria:
+- https://github.com/fiorano10/phidgets/blob/master/src/odometry.cpp
+- https://answers.ros.org/question/271254/how-to-calculate-odometry-using-encoders/
+- https://github.com/agnunez/espros
+
+Navegação:
+- OBSAV: 
+https://www.instructables.com/id/Arduino-Ultimate-Obstacle-Avoiding-Robot/ | https://www.allaboutcircuits.com/projects/build-your-own-robot-avoiding-obstacles/
+
+-Differential drive teoria:
+http://planning.cs.uiuc.edu/node659.html | https://github.com/jfstepha/differential-drive/blob/master/scripts/diff_tf.py
+
+
+
+---Comandos relevantes---
+
+IP:
+sudo service ssh start
+ssh pi@10.6.4.115
+10.6.4.115
+
+Date changer:
+sudo date --set "25 Sep 2013 15:00:00"
+
+ROSserial:
+rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
