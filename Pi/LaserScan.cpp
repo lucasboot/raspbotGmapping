@@ -6,7 +6,7 @@
 
 ros::NodeHandle  lidar; //inicializaco do node do microlidar
 std_msgs::Float32 dist;
-ros::Publisher scan_pub ("scan", &x);
+ros::Publisher scan_pub ("scan", &dist);
 
 
 void callback(const std_msgs::Float32& dist){
@@ -18,7 +18,7 @@ void setup() {
 }
 
 void loop() {
-  unsigned int num_readings = 50;
+  unsigned int num_readings = 10;
   double laser_frequency = 40;
   double ranges[num_readings];
   double intensities[num_readings];
@@ -30,13 +30,13 @@ void loop() {
   scan.angle_min = -1.57;
   scan.angle_max = 1.57;
   scan.angle_increment = 0.157075; //valor do incremento de cada 0.1 da lib gpiozero
-  scan.time_increment = (1/laser_frequency) / (num_readings);
+  scan.time_increment = (1/laser_frequenc) / (num_readings);
   scan.range_min = 0.05;
-  scan.range_max = 4.00;
+  scan.range_max = 2.00;
 
   for (unsigned int i = 0; i< num_readings; i++){
       ros::Subscriber scan_sub = lidar.subscribe("distancia", 1000, callback);
-      scan.intensities[i] = 1;
+      scan.intensities[i] = 0;
     }
     
   }
