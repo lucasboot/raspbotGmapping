@@ -34,7 +34,7 @@ if __name__ == '__main__':
 				scan.intensities[i] = 0
 				time.sleep(1.0)
 			scan_pub.publish(scan)
-	except rospy.ROSInterruptException:
+    except rospy.ROSInterruptException:
 		GPIO.cleanup()
 		pass
 		
