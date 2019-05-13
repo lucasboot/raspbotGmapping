@@ -58,18 +58,14 @@ from nav_msgs.msg import Odometry
 from tf.broadcaster import TransformBroadcaster
 from std_msgs.msg import Int16
 
-#############################################################################
-class DiffTf:
-#############################################################################
 
-    #############################################################################
+class DiffTf:
     def __init__(self):
-    #############################################################################
         rospy.init_node("diff_tf")
         self.nodename = rospy.get_name()
         rospy.loginfo("-I- %s started" % self.nodename)
         
-        #### parameters #######
+        #### parametros #######
         self.rate = rospy.get_param('~rate',10.0)  # taxa de publicação da transformação
         self.ticks_meter = float(rospy.get_param('ticks_meter', 302))  # Quantidade de ticks do encoders por metro percorrido (20/0.0661)
         self.base_width = float(rospy.get_param('~base_width', 0.245)) # O comprimento do distanciamento das rodas em metros
@@ -86,25 +82,25 @@ class DiffTf:
         self.t_next = rospy.Time.now() + self.t_delta
         
         # internal data
-        self.enc_left = None        # wheel encoder readings
+        self.enc_left = None        # leitura da roda esquerda
         self.enc_right = None
-        self.left = 0               # actual values coming back from robot
+        self.left = 0               # valor atual da roda esquerda
         self.right = 0
         self.lmult = 0
         self.rmult = 0
         self.prev_lencoder = 0
         self.prev_rencoder = 0
-        self.x = 0                  # position in xy plane 
-        self.y = 0
+        self.x = 0                  # posicao x no plano xy 
+        self.y = 0                  # posicao y no plano xy
         self.th = 0
         self.dx = 0                 # speeds in x/rotation
         self.dr = 0
         self.then = rospy.Time.now()
         
         # subscriptions
-        rospy.Subscriber("lwheel", Int16, self.lwheelCallback)
-        rospy.Subscriber("rwheel", Int16, self.rwheelCallback)
-        self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10)
+        rospy.Subscriber("lwheel", Int16, self.lwheelCallback) #subscriber da rpm da roda esquerda
+        rospy.Subscriber("rwheel", Int16, self.rwheelCallback) #subscriber da rpm da roda direita
+        self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10) #publisher dos dados odom
         self.odomBroadcaster = TransformBroadcaster()
         
     #############################################################################
@@ -145,14 +141,14 @@ class DiffTf:
            
              
             if (d != 0):
-                # calculate distance traveled in x and y
+                # calculo de distancia percorrida através de x e y
                 x = cos( th ) * d
                 y = -sin( th ) * d
-                # calculate the final position of the robot
+                # posicao final do robo, após os cálculos
                 self.x = self.x + ( cos( self.th ) * x - sin( self.th ) * y )
                 self.y = self.y + ( sin( self.th ) * x + cos( self.th ) * y )
             if( th != 0):
-                self.th = self.th + th
+                self.th = self.th + th #angulo theta final do robo
                 
             # publish the odom information
             quaternion = Quaternion()
@@ -185,7 +181,7 @@ class DiffTf:
 
 
     #############################################################################
-    def lwheelCallback(self, msg):
+    def lwheelCallback(self, msg): #funcao callback da roda esquerda
     #############################################################################
         enc = msg.data
         if (enc < self.encoder_low_wrap and self.prev_lencoder > self.encoder_high_wrap):
@@ -198,7 +194,7 @@ class DiffTf:
         self.prev_lencoder = enc
         
     #############################################################################
-    def rwheelCallback(self, msg):
+    def rwheelCallback(self, msg): #funcao callback da roda direita
     #############################################################################
         enc = msg.data
         if(enc < self.encoder_low_wrap and self.prev_rencoder > self.encoder_high_wrap):
