@@ -66,7 +66,7 @@ class DiffTf:
         rospy.loginfo("-I- %s started" % self.nodename)
         
         #### parametros #######
-        self.rate = rospy.get_param('~rate',10.0)  # taxa de publicação da transformação
+        self.rate = rospy.get_param('~rate',10.0)  
         self.ticks_meter = float(rospy.get_param('ticks_meter', 302))  # Quantidade de ticks do encoders por metro percorrido (20/0.0661)
         self.base_width = float(rospy.get_param('~base_width', 0.245)) # O comprimento do distanciamento das rodas em metros
         
@@ -141,10 +141,8 @@ class DiffTf:
            
              
             if (d != 0):
-                # calculo de distancia percorrida através de x e y
                 x = cos( th ) * d
                 y = -sin( th ) * d
-                # posicao final do robo, após os cálculos
                 self.x = self.x + ( cos( self.th ) * x - sin( self.th ) * y )
                 self.y = self.y + ( sin( self.th ) * x + cos( self.th ) * y )
             if( th != 0):
