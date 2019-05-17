@@ -24,26 +24,43 @@
 
 import time
 import VL53L0X
+from gpiozero import Servo
+from time import sleep
+import numpy
 
+cont = 0;
 # Create a VL53L0X object
 tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x29)
-# I2C Address can change before tof.open()
-# tof.change_address(0x32)
 tof.open()
-# Start ranging
 tof.start_ranging(VL53L0X.Vl53l0xAccuracyMode.BETTER)
+myGPIO=17 
+myCorrection=0.45
+maxPW=(2.0+myCorrection)/1000
+minPW=(1.0-myCorrection)/1000
+
+myServo = Servo(myGPIO,min_pulse_width=minPW,max_pulse_width=maxPW)
+
 
 timing = tof.get_timing()
 if timing < 20000:
     timing = 20000
 print("Timing %d ms" % (timing/1000))
-
-for count in range(1, 101):
+value = 0
+while (value<=20):
+    value2=(float(value)-10)/10 
+    myServo.value=value2
+    print("Servo value set to "+str(value2))
     distance = tof.get_distance()
     if distance > 0:
-        print("%d mm, %d cm, %d" % (distance, (distance/10), count))
-
+        #print("%d mm, %d cm, %d" % (distance, (distance/10), count))
+        cont = cont + 1
+    value = value + 0.01
     time.sleep(timing/1000000.00)
-
+    
+print(str(cont) + " leituras realizadas")
 tof.stop_ranging()
 tof.close()
+
+
+  
+  

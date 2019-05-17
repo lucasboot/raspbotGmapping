@@ -25,7 +25,7 @@ print("Min pulse width is set to 0.55 ms")
 
 while True:
 
-  for value in numpy.arange(0,20, 0.1):
+  for value in numpy.arange(0,20, 0.01):
     value2=(float(value)-10)/10 
     myServo.value=value2
     print("Servo value set to "+str(value2))
