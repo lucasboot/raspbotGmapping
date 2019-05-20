@@ -34,18 +34,16 @@ void contador2(){
 
 void atualiza(int pin, int ind){
   int inSensor = analogRead(pin); 
-  
+  Serial.println(int(analogRead(pin)));
   if (inSensor > limiar) {
     if(ind == 2){
       contador2();
       pulsosl.data = pulsos2;
-      Serial.println(pulsos2);
       lwheel_pub.publish(&pulsosl);
     } else {
       contador();
       pulsosr.data = pulsos1;
       rwheel_pub.publish(&pulsosr);
-      Serial.println(pulsos1);
     }
   }
   encoder.spinOnce();
@@ -56,5 +54,5 @@ void atualiza(int pin, int ind){
 void loop() {
   atualiza(pin1, 1);
   atualiza(pin2, 2);
-  delay(100);
+  delay(1000);
 }

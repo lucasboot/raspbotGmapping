@@ -47,13 +47,15 @@ void setup()
 void loop()
 {
   //Atualiza contador a cada segundo
-  if (millis() - timeold >= 1000)
+  if (millis() - timeold >= 100)
   {
     //Desabilita interrupcao durante o calculo
     detachInterrupt(digitalPinToInterrupt(pino_D0));
     detachInterrupt(digitalPinToInterrupt(pino_D1));
     pulsosl.data = pulsos;
     pulsosr.data = pulsos2;
+    Serial.println(pulsos);
+    Serial.println(pulsos2);
     lwheel_pub.publish(&pulsosl);
     rwheel_pub.publish(&pulsosr);
     encoder.spinOnce();

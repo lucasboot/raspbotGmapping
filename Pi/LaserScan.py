@@ -32,8 +32,8 @@ if __name__ == '__main__':
 				scan.range_min = 0.05
 				scan.range_max = 2.00
 				for i in range(0, num_readings-1, 1):
-					scan.ranges[i] = 1  # tof.get_distance()
-					scan.intensities[i] = 0
+					scan.ranges.append(tof.get_distance())
+					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)
 				scan_pub.publish(scan)
 	except rospy.ROSInterruptException:
