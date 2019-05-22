@@ -31,7 +31,7 @@ if __name__ == '__main__':
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 2.00
-				for i in range(0, num_readings-1, 1):
+				for i in range(0, num_readings, 1):
 					scan.ranges.append(tof.get_distance())
 					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)
