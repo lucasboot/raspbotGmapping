@@ -31,6 +31,6 @@ try:
         print(cont2)
         msg2.data = cont2
         pub2.publish(msg2)    
-except KeyboardInterrupt:  
-    GPIO.cleanup()       # clean up GPIO on CTRL+C exit  
-GPIO.cleanup()           # clean up GPIO on normal exit
+except rospy.ROSInterruptException:
+		GPIO.cleanup()
+		pass       # clean up GPIO on normal exit
