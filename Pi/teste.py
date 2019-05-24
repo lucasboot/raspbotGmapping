@@ -23,12 +23,12 @@ try:
     while True:
         if(GPIO.event_detected(20)):
             cont1 = cont1 + 1
-            print(cont1)
+            print cont1
             msg1.data = cont1
             pub1.publish(msg1)
         if(GPIO.event_detected(21)):
             cont2 = cont2 + 1
-            print(cont2)
+            print cont2
             msg2.data = cont2
             pub2.publish(msg2)    
 except rospy.ROSInterruptException:
