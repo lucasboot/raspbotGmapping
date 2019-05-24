@@ -2,8 +2,13 @@
 http://codelectron.com/measure-distance-ultrasonic-sensor-pi-hc-sr04/
 
 - Tópicos para o SLAM:
-LaserScan: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
-Odom: http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom | http://docs.ros.org/kinetic/api/nav_msgs/html/msg/Odometry.html 
+Rviz:
+http://wiki.ros.org/rviz
+LaserScan: 
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
+http://wiki.ros.org/laser_pipeline/Tutorials/IntroductionToWorkingWithLaserScannerData
+Odom: 
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom | http://docs.ros.org/kinetic/api/nav_msgs/html/msg/Odometry.html 
 http://docs.ros.org/kinetic/api/nav_msgs/html/msg/Odometry.html
 
 - Comunicação com o Arduino:
@@ -65,4 +70,7 @@ sudo date --set "25 Sep 2013 15:00:00"
 
 ROSserial:
 rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
+
+Descobrir o nome do frame id do Laser etc:
+rostopic echo /scan | grep frame_id
 
