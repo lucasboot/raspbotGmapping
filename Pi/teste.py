@@ -19,18 +19,18 @@ cont2 = 0
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)  
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
 try:  
-    if(GPIO.event_detected(20)):
-        cont1 = cont1 + 1
-        print(cont1)
-        msg1.data = cont1
-        pub1.publish(msg1)
-    if(GPIO.event_detected(21)):
-        cont2 = cont2 + 1
-        print(cont2)
-        msg2.data = cont2
-        pub2.publish(msg2)    
+    while True:
+        if(GPIO.event_detected(20)):
+            cont1 = cont1 + 1
+            print(cont1)
+            msg1.data = cont1
+            pub1.publish(msg1)
+        if(GPIO.event_detected(21)):
+            cont2 = cont2 + 1
+            print(cont2)
+            msg2.data = cont2
+            pub2.publish(msg2)    
 except rospy.ROSInterruptException:
-		GPIO.cleanup()
-		pass       # clean up GPIO on normal exit
+        GPIO.cleanup()
+        pass       # clean up GPIO on normal exit
