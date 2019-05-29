@@ -74,3 +74,6 @@ rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
 Descobrir o nome do frame id do Laser etc:
 rostopic echo /scan | grep frame_id
 
+27.66mm do encoder
+64.5 mm da roda
+
