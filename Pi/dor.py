@@ -40,6 +40,6 @@ if __name__ == '__main__':
 	init_GPIO()
 	init_interrupt()
 	while True:
-		calculate_speed(20)	# call this function with wheel radius as parameter
+		calculate_speed(3.225)	# call this function with wheel radius as parameter
   		print('rpm:{0:.0f}-RPM kmh:{1:.0f}-KMH dist_meas:{2:.2f}m pulse:{3}'.format(rpm,km_per_hour,dist_meas,pulse))
 		sleep(0.1)
