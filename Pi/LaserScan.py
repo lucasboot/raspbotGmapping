@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	try:
 			while True:
 				num_readings = 67
-				laser_frequency = 40
+				laser_frequency = 16 #arquivo testando no Raspberry
 				scan_time = rospy.Time.now()
 				scan = LaserScan()
 				scan.header.stamp = scan_time
