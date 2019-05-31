@@ -52,7 +52,7 @@ cont1 = 0
 cont2 = 0
 allStop()
 try:
-	while (cont1 < 30 and cont2 < 30):
+	while (cont1 < 20 and cont2 < 20):
     		forwardDrive()
 		if(gpio.input(20) == 1):
         		cont1 = cont1 + 1
@@ -64,7 +64,7 @@ try:
         		msg2.data = cont2
         		pub2.publish(msg2)
         		print cont2
-		time.sleep(0.1)
+	
 except rospy.ROSInterruptException:	
 		allStop()
 		gpio.cleanup()
