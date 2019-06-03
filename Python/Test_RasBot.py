@@ -6,7 +6,7 @@ robot = RasBot(True)
 
 # The values to the methods must be between 0 - 100 (0% - 100%)
 robot.moveF(80)
-sleep(1)
+sleep(2)
 robot.moveB(80)
 sleep(1)
 robot.turnL(50)
