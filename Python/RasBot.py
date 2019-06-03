@@ -24,6 +24,7 @@ class RasBot:
 		self.mLB.start(0)
 		self.mRF.start(0)
 		self.mRB.start(0)
+		
 	def __del__(self):
 		self.stop()
 		gpio.cleanup()
