@@ -1,4 +1,4 @@
-from Lib/RasBot import RasBot
+from RasBot import RasBot
 from time import sleep
 
 # Delete the "True" parameter if you don't want debug mensages from the class RasBot
