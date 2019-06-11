@@ -77,3 +77,11 @@ rostopic echo /scan | grep frame_id
 27.66mm do encoder
 64.5 mm da roda
 
+ROS SERVER
+- Vai no master, roda o roscore;
+- export ROS_IP do master;
+- Vai pro Rasp, export ROS_MASTER_URI=http://ipdomaster:codigodoroscore/
+- No rasp, export ROS_IP=ipdorasp;
+- FEITO!
+
+
