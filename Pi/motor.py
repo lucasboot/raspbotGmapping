@@ -16,90 +16,90 @@ forwardRight = PWMOutputDevice(PWM_FORWARD_RIGHT_PIN, True, 0, 1000)
 reverseRight = PWMOutputDevice(PWM_REVERSE_RIGHT_PIN, True, 0, 1000)
 
 def allStop():
-  print("Parando")
-  forwardLeft.value = 0
-  reverseLeft.value = 0
-  forwardRight.value = 0
-  reverseRight.value = 0
+	print("Parando")
+	forwardLeft.value = 0
+	reverseLeft.value = 0
+	forwardRight.value = 0
+	reverseRight.value = 0
 
 def forwardDrive():
-  print("Para frente")
-  forwardLeft.value = 0.0
-  reverseLeft.value = 1.0
-  forwardRight.value = 0.0
-  reverseRight.value = 1.0
+	print("Para frente")
+	forwardLeft.value = 0.0
+	reverseLeft.value = 1.0
+	forwardRight.value = 0.0
+	reverseRight.value = 1.0
 
 def reverseDrive():
-  print("Para tras")
-  forwardLeft.value = 1.0
-  reverseLeft.value = 0.0
-  forwardRight.value = 1.0
-  reverseRight.value = 0
+	print("Para tras")
+	forwardLeft.value = 1.0
+	reverseLeft.value = 0.0
+	forwardRight.value = 1.0
+	reverseRight.value = 0
 
 def spinLeft():
-  print("Girar para esquerda")
-  forwardLeft.value = 1.0
-  reverseLeft.value = 0
-  forwardRight.value = 0
-  reverseRight.value = 1.0
+	print("Girar para esquerda")
+	forwardLeft.value = 1.0
+	reverseLeft.value = 0
+	forwardRight.value = 0
+	reverseRight.value = 1.0
 
 def SpinRight():
-  print("Girar para direita")
-  forwardLeft.value = 0
-  reverseLeft.value = 1.0
-  forwardRight.value = 1.0
-  reverseRight.value = 0
+	print("Girar para direita")
+	forwardLeft.value = 0
+	reverseLeft.value = 1.0
+	forwardRight.value = 1.0
+	reverseRight.value = 0
 
 def forwardTurnLeft():
-  print("Noroeste")
-  forwardLeft.value = 
-  reverseLeft.value = 0.2
-  forwardRight.value = 
-  reverseRight.value = 0.8
+	print("Noroeste")
+	forwardLeft.value = 
+	reverseLeft.value = 0.2
+	forwardRight.value = 
+	reverseRight.value = 0.8
 
 def forwardTurnRight():
-  print("Nordeste")
-  forwardLeft.value = 0
-  reverseLeft.value = 0.8
-  forwardRight.value = 0
-  reverseRight.value = 0.2
+	print("Nordeste")
+	forwardLeft.value = 0
+	reverseLeft.value = 0.8
+	forwardRight.value = 0
+	reverseRight.value = 0.2
 
 def reverseTurnLeft():
-  print("Sudoeste")
-  forwardLeft.value = 0.2
-  reverseLeft.value = 0
-  forwardRight.value = 0.8
-  reverseRight.value = 0
+	print("Sudoeste")
+	forwardLeft.value = 0.2
+	reverseLeft.value = 0
+	forwardRight.value = 0.8
+	reverseRight.value = 0
 
 def reverseTurnRight():
-  print("Sudeste")
-  forwardLeft.value = 0.8
-  reverseLeft.value = 0
-  forwardRight.value = 0.2
-  reverseRight.value = 0
+	print("Sudeste")
+	forwardLeft.value = 0.8
+	reverseLeft.value = 0
+	forwardRight.value = 0.2
+	reverseRight.value = 0
 
 def main():
-  allStop()
-  forwardDrive()
-  sleep(6)
-  reverseDrive()
-  sleep(6)
-'''
-  spinLeft()
-  sleep(6)
-  SpinRight()
-  sleep(6)
-  forwardTurnLeft()
-  sleep(6)
-  forwardTurnRight()
-  sleep(6)
-  reverseTurnLeft()
-  sleep(6)
-  reverseTurnRight()
-  sleep(6)
-'''
+	allStop()
+	forwardDrive()
+	sleep(6)
+	reverseDrive()
+	sleep(6)
+	'''
+	spinLeft()
+	sleep(6)
+	SpinRight()
+	sleep(6)
+	forwardTurnLeft()
+	sleep(6)
+	forwardTurnRight()
+	sleep(6)
+	reverseTurnLeft()
+	sleep(6)
+	reverseTurnRight()
+	sleep(6)
+	'''
 
 if __name__ == "__main__":
-   while(True):
-        main()
+	while(True):
+		main()
   
