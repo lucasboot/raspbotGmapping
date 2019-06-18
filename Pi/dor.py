@@ -1,45 +1,44 @@
-#!/usr/bin/python3
-import RPi.GPIO as GPIO
-from time import sleep
-import time, math
+#!/usr/bin/python
+
+import time
+import math
+import rospy
+from std_msgs.msg import Int16
 
 dist_meas = 0.00
-km_per_hour = 0
-rpm = 0
-elapse = 0
+d_m =0
 sensor = 20
-pulse = 0
-start_timer = time.time()
+contador = 0
+pulso = 0
 
-def init_GPIO():					# initialize GPIO
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
-	GPIO.setup(sensor,GPIO.IN,GPIO.PUD_UP)
+def cb(data):
+	global pulso
+	pulso = data.data
 
-def calculate_elapse(channel):				# callback function
-	global pulse, start_timer, elapse
-	pulse+=1								# increase pulse by 1 whenever interrupt occurred
-	elapse = time.time() - start_timer		# elapse for every 1 complete rotation made!
-	start_timer = time.time()				# let current time equals to start_timer
+def cb2(data):
+	global contador
+	contador = data.data
 
-def calculate_speed(r_cm):
-	global pulse,elapse,rpm,dist_km,dist_meas,km_per_sec,km_per_hour
-	if elapse !=0:							# to avoid DivisionByZero error
-		rpm = 1/elapse * 60
+def calculate_speed(r_cm, pulsos):
+	global dist_meas,m_per_sec, sensor, d_m
+	if pulsos !=0:							# to avoid DivisionByZero error
 		circ_cm = (2*math.pi)*r_cm			# calculate wheel circumference in CM
-		dist_km = circ_cm/100000 			# convert cm to km
-		km_per_sec = dist_km / elapse		# calculate KM/sec
-		km_per_hour = km_per_sec * 3600		# calculate KM/h
-		dist_meas = (dist_km*pulse)*1000	# measure distance traverse in meter
-		return km_per_hour
+		d_m = circ_cm/100 			# convert cm to m
+		m_per_sec = d_m/5		# calculate m/sec
+		dist_meas = (pulsos/sensor) * circ_cm	# measure distance traverse in cm
+		return m_per_sec
+	else:
+		return 0
 
-def init_interrupt():
-	GPIO.add_event_detect(sensor, GPIO.FALLING, callback = calculate_elapse, bouncetime = 20)
 
 if __name__ == '__main__':
-	init_GPIO()
-	init_interrupt()
 	while True:
-		calculate_speed(3.225)	# call this function with wheel radius as parameter
-  		print(rpm)
+		start = time.time()
+		global contador
+		global pulso
+		sub2 = rospy.Subscriber('lwheel', Int16, cb2)
+		while time.time() < start +5:
+			sub = rospy.Subscriber('lwheel', Int16, cb)
+		giros = pulso - contador
+		calculate_speed(3.225, giros)	# call this function with wheel radius as parameter
 		sleep(0.1)
