@@ -31,5 +31,5 @@ def cb(data):
 
 if __name__ == '__main__':
 	while True:
-		sub = rospy.Subscriber('giros', Int16, cb)
+		sub = rospy.Subscriber('girosl', Int16, cb)
 		time.sleep(0.01)
