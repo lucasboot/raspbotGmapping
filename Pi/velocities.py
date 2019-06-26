@@ -49,7 +49,7 @@ diff_controller.py - controller for a differential drive
 
 import rospy
 import roslib
-roslib.load_manifest('differential_drive')
+#roslib.load_manifest('differential_drive')
 from math import sin, cos, pi
 
 from geometry_msgs.msg import Quaternion
@@ -59,7 +59,7 @@ from tf.broadcaster import TransformBroadcaster
 from std_msgs.msg import Int16
 
 
-class DiffTf:
+class DiffTf: 
     def __init__(self):
         rospy.init_node("diff_tf")
         self.nodename = rospy.get_name()
