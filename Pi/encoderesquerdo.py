@@ -12,11 +12,12 @@ encoder1 = DigitalInputDevice(21)
 cont1 = 0
 def callback (data):
         global cont1
-        if(data.data):
+        print(data.data)
+        '''if(data.data):
                 cont1 = cont1 +1 
         else:
                 cont1 = cont1 - 1
-                
+           '''     
 while True:
 	inicio  = cont1
         start = time.time()
