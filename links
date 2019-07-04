@@ -84,4 +84,5 @@ ROS SERVER
 - No rasp, export ROS_IP=ipdorasp;
 - FEITO!
 
+source ~/catkin_ws/devel/setup.bash
 
