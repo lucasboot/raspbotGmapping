@@ -4,6 +4,18 @@ from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
 import time
 import VL53L0X
+from gpiozero import Servo
+from time import sleep
+import numpy
+#Configurando o servo motor
+
+#####################
+myGPIO=17 #5V e GND
+myCorrection=0.45
+maxPW=(2.0+myCorrection)/1000
+minPW=(1.0-myCorrection)/1000
+myServo = Servo(myGPIO,min_pulse_width=minPW,max_pulse_width=maxPW)
+#####################
 
 if __name__ == '__main__':
 	rospy.init_node('rangesensor', anonymous=True)
@@ -31,11 +43,17 @@ if __name__ == '__main__':
 				scan.time_increment = (1/laser_frequency)/(num_readings)
 				scan.range_min = 0.05
 				scan.range_max = 2.00
+				value = 0
 				for i in range(0, num_readings, 1):
+					value2=(float(value)-10)/10 
+    				myServo.value=value2
+					value = valua + 0.1
 					scan.ranges.append(tof.get_distance()/1000.0)
 					scan.intensities.append(0)
 					time.sleep(timing/1000000.00)
 				scan_pub.publish(scan)
+				myServo.value= 0
+				sleep(0.5)
 	except rospy.ROSInterruptException:
 			GPIO.cleanup()
 			pass
