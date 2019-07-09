@@ -88,18 +88,18 @@ class DiffTf:
         self.right = 0
         self.lmult = 0
         self.rmult = 0
-        self.prev_lencoder = 0
+        self.prev_lencoder = 0      #variável para analisar se houve incremento ou decremento na roda
         self.prev_rencoder = 0
         self.x = 0                  # posicao x no plano xy 
         self.y = 0                  # posicao y no plano xy
-        self.th = 0
+        self.th = 0                 # angulo teta de orientação do robô
         self.dx = 0                 # speeds in x/rotation
         self.dr = 0
         self.then = rospy.Time.now()
         
         # subscriptions
-        rospy.Subscriber("lwheel", Int16, self.lwheelCallback) #subscriber da rpm da roda esquerda
-        rospy.Subscriber("rwheel", Int16, self.rwheelCallback) #subscriber da rpm da roda direita
+        rospy.Subscriber("lwheel", Int16, self.lwheelCallback) #subscriber da contagem de giros da roda esquerda
+        rospy.Subscriber("rwheel", Int16, self.rwheelCallback) #subscriber da contagem de giros da roda direita
         self.odomPub = rospy.Publisher("odom", Odometry, queue_size=10) #publisher dos dados odom
         self.odomBroadcaster = TransformBroadcaster()
         
@@ -108,7 +108,7 @@ class DiffTf:
     #############################################################################
         r = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
-            self.update()
+            self.update() #atualização dos dados de odometria
             r.sleep()
        
      
@@ -122,7 +122,7 @@ class DiffTf:
             elapsed = elapsed.to_sec()
             
             # calculate odometry
-            if self.enc_left == None:
+            if self.enc_left == None: 
                 d_left = 0
                 d_right = 0
             else:
@@ -162,7 +162,8 @@ class DiffTf:
                 self.odom_frame_id
                 )
             
-            odom = Odometry()
+            odom = Odometry() #mensagem do tipo odom
+            ###parâmetros para preencher a mensagem do tipo odom###
             odom.header.stamp = now
             odom.header.frame_id = self.odom_frame_id
             odom.pose.pose.position.x = self.x
@@ -170,16 +171,18 @@ class DiffTf:
             odom.pose.pose.position.z = 0
             odom.pose.pose.orientation = quaternion
             odom.child_frame_id = self.base_frame_id
+            ###velocidades em cada eixo###
             odom.twist.twist.linear.x = self.dx
             odom.twist.twist.linear.y = 0
             odom.twist.twist.angular.z = self.dr
+            ###publicando a mensagem no tópico odom###
             self.odomPub.publish(odom)
             
             
 
 
     #############################################################################
-    def lwheelCallback(self, msg): #funcao callback da roda esquerda
+    def lwheelCallback(self, msg): #funcao callback para analisar se houve um incremento ou decremento na posição do robô
     #############################################################################
         enc = msg.data
         if (enc < self.encoder_low_wrap and self.prev_lencoder > self.encoder_high_wrap):

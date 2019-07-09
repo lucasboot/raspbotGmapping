@@ -11,6 +11,7 @@
 from gpiozero import Servo
 from time import sleep
 import numpy
+import time
 
 myGPIO=17 #5V e GND
 myCorrection=0.45
@@ -23,13 +24,14 @@ print("Using GPIO17")
 print("Max pulse width is set to 2.45 ms")
 print("Min pulse width is set to 0.55 ms")
 
-while True:
-
-  for value in numpy.arange(3,17, 0.3):
-    value2=(float(value)-10)/10 
-    myServo.value=value2
-    print("Servo value set to "+str(value2))
-    sleep (0.1)
+#while True:
+start = time.time()
+for value in numpy.arange(3,17, 0.3):
+  value2=(float(value)-10)/10 
+  myServo.value=value2
+  print("Servo value set to "+str(value2))
+  sleep (0.1)
+print(time.time() - start)
   
 
 
