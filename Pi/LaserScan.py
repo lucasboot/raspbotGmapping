@@ -31,7 +31,7 @@ if __name__ == '__main__':
 	rate = rospy.Rate(10)  # rate para execucao dos comandos do ROS
 	try:
 			while True:
-				num_readings = 67
+				num_readings = 47
 				laser_frequency = 16 #arquivo testando no Raspberry
 				scan_time = rospy.Time.now()
 				scan = LaserScan()
