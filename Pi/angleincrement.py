@@ -12,7 +12,19 @@ from gpiozero import Servo
 from time import sleep
 import numpy
 import time
+import VL53L0X
 
+# Create a VL53L0X object
+tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x29)
+# I2C Address can change before tof.open()
+# tof.change_address(0x32)
+tof.open()
+# Start ranging
+tof.start_ranging(VL53L0X.Vl53l0xAccuracyMode.BETTER)
+
+timing = tof.get_timing()
+if timing < 20000:
+    timing = 20000
 myGPIO=17 #5V e GND
 myCorrection=0.45
 maxPW=(2.0+myCorrection)/1000
@@ -26,12 +38,21 @@ print("Min pulse width is set to 0.55 ms")
 
 #while True:
 start = time.time()
+cont = 0
 for value in numpy.arange(3,17, 0.3):
   value2=(float(value)-10)/10 
+  distance = tof.get_distance()
+  if distance > 0:
+    print(distance/10)
+    cont = cont +1
   myServo.value=value2
-  print("Servo value set to "+str(value2))
-  sleep (0.1)
-print(time.time() - start)
+  #print("Servo value set to "+str(value2))
+  time.sleep(timing/1000000.00)
+print("Numero de leituras")
+print(cont)
+#print(time.time() - start)
+tof.stop_ranging()
+tof.close()
   
 
 
