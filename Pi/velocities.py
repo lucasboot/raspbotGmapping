@@ -88,11 +88,11 @@ class DiffTf:
         self.right = 0
         self.lmult = 0
         self.rmult = 0
-        self.prev_lencoder = 0      #variável para analisar se houve incremento ou decremento na roda
+        self.prev_lencoder = 0      
         self.prev_rencoder = 0
         self.x = 0                  # posicao x no plano xy 
         self.y = 0                  # posicao y no plano xy
-        self.th = 0                 # angulo teta de orientação do robô
+        self.th = 0                 # angulo teta de orientacao do robo
         self.dx = 0                 # speeds in x/rotation
         self.dr = 0
         self.then = rospy.Time.now()
@@ -108,7 +108,7 @@ class DiffTf:
     #############################################################################
         r = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
-            self.update() #atualização dos dados de odometria
+            self.update() #atualizacao dos dados de odometria
             r.sleep()
        
      
@@ -163,7 +163,7 @@ class DiffTf:
                 )
             
             odom = Odometry() #mensagem do tipo odom
-            ###parâmetros para preencher a mensagem do tipo odom###
+            ###parametros para preencher a mensagem do tipo odom###
             odom.header.stamp = now
             odom.header.frame_id = self.odom_frame_id
             odom.pose.pose.position.x = self.x
@@ -175,14 +175,14 @@ class DiffTf:
             odom.twist.twist.linear.x = self.dx
             odom.twist.twist.linear.y = 0
             odom.twist.twist.angular.z = self.dr
-            ###publicando a mensagem no tópico odom###
+            ###publicando a mensagem no topico odom###
             self.odomPub.publish(odom)
             
             
 
 
     #############################################################################
-    def lwheelCallback(self, msg): #funcao callback para analisar se houve um incremento ou decremento na posição do robô
+    def lwheelCallback(self, msg): #funcao callback para analisar se houve um incremento ou decremento na posicao do robo
     #############################################################################
         enc = msg.data
         if (enc < self.encoder_low_wrap and self.prev_lencoder > self.encoder_high_wrap):
