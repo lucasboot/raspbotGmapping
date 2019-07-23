@@ -59,9 +59,8 @@ def distance():
 	return distance
 
 rospy.init_node('encoderEsquerdo', anonymous=True)
-msg = Int16()
 pub = rospy.Publisher('lwheel', Int16, queue_size=1)
-pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
+#pub2 = rospy.Publisher('girosl', Float32, queue_size=1)
 encoder1 = DigitalInputDevice(20)
 cont1 = 0
 def parafrente(data):
@@ -71,13 +70,14 @@ def parafrente(data):
 		reverseDrive()
 	inicio  = cont1
 	start = time.time()
-	giros = Float32()
-	while time.time() < start +1:
+	#giros = Float32()
+	msg = Int16()
+	while time.time() < start +5:
 		news = time.time()
 		while (encoder1.value == 0):
 			pub.publish(msg)
 			if((news + 1)< time.time()):
-				giros.data = 0.0
+				#giros.data = 0.0
 				pub2.publish(giros)
 		global cont1
 		if(data):
@@ -89,12 +89,14 @@ def parafrente(data):
 		news = time.time()
 		while(encoder1.value == 1):
 			pub.publish(msg)
+			'''
 			if((news + 1)< time.time()):
 				giros.data = 0.0
 				pub2.publish(giros) 
 		giros.data =float(cont1 - inicio)/20.0
     
 	pub2.publish(giros)
+'''
 '''
 def paratras():
 	reverseDrive()
@@ -135,8 +137,8 @@ def main():
 if __name__ == '__main__':
     try:
 	while True:
-        	main()
+        main()
     except rospy.ROSInterruptException:
-	GPIO.cleanup()
-	allStop()
+		GPIO.cleanup()
+		allStop()
     pass
