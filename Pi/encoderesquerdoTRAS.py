@@ -9,24 +9,29 @@ from gpiozero import PWMOutputDevice
 from time import sleep
 import time
 
+def setup():
+	GPIO.setmode(GPIO.BCM) 
+	GPIO_TRIGGER = 23 
+	GPIO_ECHO = 24
+	GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+	GPIO.setup(GPIO_ECHO, GPIO.IN)
 
-GPIO.setmode(GPIO.BCM) 
-GPIO_TRIGGER = 23 
-GPIO_ECHO = 24
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
+	# Motor A, Left Side 
+	###################################################################################
 
-# Motor A, Left Side 
-###################################################################################
+	PWM_FORWARD_LEFT_PIN = 6	# GPIO06
+	PWM_REVERSE_LEFT_PIN = 13	# GPIO13 
 
-PWM_FORWARD_LEFT_PIN = 6	# GPIO06
-PWM_REVERSE_LEFT_PIN = 13	# GPIO13 
+	forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
+	reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
 
-forwardLeft = PWMOutputDevice(PWM_FORWARD_LEFT_PIN, True, 0, 1000)
-reverseLeft = PWMOutputDevice(PWM_REVERSE_LEFT_PIN, True, 0, 1000)
+	####################################################################################
+	#Funcoes do motor
+	rospy.init_node('encoderEsquerdo', anonymous=True)
+	pub = rospy.Publisher('lwheel', Int16, queue_size=1)
+	encoder1 = DigitalInputDevice(20)
+	
 
-####################################################################################
-#Funcoes do motor
 def allStop():
 	#print("Parando")
 	forwardLeft.value = 0
@@ -57,11 +62,8 @@ def distance():
 	TimeElapsed = StopTime - StartTime
 	distance = (TimeElapsed*34300)/2 #formula para obtencao da distancia
 	return distance
-rospy.init_node('encoderEsquerdo', anonymous=True)
-pub = rospy.Publisher('lwheel', Int16, queue_size=1)
-encoder1 = DigitalInputDevice(20)
-def parafrente(data):
-	global cont1
+
+def parafrente(data, cont):
 	if(data):
 		forwardDrive()
 	else:
@@ -70,28 +72,30 @@ def parafrente(data):
 	while (encoder1.value == 0):
 		pub.publish(msg)
 	if(data):
-		cont1 = cont1 +1
+		cont = cont +1
 	else:
-		cont1 = cont1 -1
+		cont = cont -1
 	msg.data = cont1
 	pub.publish(msg)
 	while(encoder1.value == 1):
 		pub.publish(msg)
-def main():
-	dist = distance()
-	print(dist)
-	if (dist < 20.0):
-		parafrente(False)
-		print("Gira")
-	else:
-		parafrente(True)
-		print("Para frente")
+	return cont
+
 if __name__ == '__main__':
+	setup()
+	cont1 = 0
     try:
-	while True:
-        	main()
-		time.sleep(0.0001)
+		while True:
+			dist = distance()
+			print(dist)
+			if (dist < 20.0):
+				cont1 = parafrente(False, cont1)
+				print("Gira")
+			else:
+				cont1 = parafrente(True, cont1)
+				print("Para frente")
+			time.sleep(0.0001)
     except rospy.ROSInterruptException:
-		GPIO.cleanup()
 		allStop()
+		GPIO.cleanup()
     pass
