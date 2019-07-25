@@ -8,19 +8,6 @@ import RPi.GPIO as GPIO
 from gpiozero import PWMOutputDevice
 from time import sleep
 import time
-import VL53L0X
-
-# Create a VL53L0X object
-tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x29)
-# I2C Address can change before tof.open()
-# tof.change_address(0x32)
-tof.open()
-# Start ranging
-tof.start_ranging(VL53L0X.Vl53l0xAccuracyMode.BETTER)
-
-timing = tof.get_timing()
-if timing < 20000:
-    timing = 20000
 
 GPIO.setmode(GPIO.BCM) 
 GPIO_TRIGGER = 23 
@@ -59,7 +46,7 @@ def reverseDrive():
 	#print("Girar para esquerda")
 	forwardLeft.value = 0.0
 	reverseLeft.value = 1.0
-	
+
 #Funcao da distancia com o ultrassom
 def distance():
 	GPIO.output(GPIO_TRIGGER, True)
@@ -98,7 +85,6 @@ if __name__ == '__main__':
     cont1 = 0
     try:
 		while True:
-			#distance = tof.get_distance()
 			dist = distance()
 			print(dist)
 			if (dist < 20.0):
@@ -110,7 +96,5 @@ if __name__ == '__main__':
 			time.sleep(0.0001)
     except rospy.ROSInterruptException:
 		allStop()
-		tof.stop_ranging()
-		tof.close()
 		GPIO.cleanup()
     pass

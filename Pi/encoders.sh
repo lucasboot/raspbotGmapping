@@ -1,3 +1,3 @@
 #!/bin/bash 
-python coderdireito.py &
-python coderesq.py 
+python encoderesquerdoTRAS.py  &
+python encoderdireitoTRAS.py 
