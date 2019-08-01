@@ -20,7 +20,8 @@ myServo = Servo(myGPIO,min_pulse_width=minPW,max_pulse_width=maxPW)
 
 if __name__ == '__main__':
 	rospy.init_node('rangesensor', anonymous=True)
-	tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x29)
+#	tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x29)
+	tof = VL53L0X.VL53L0X(i2c_bus=1,i2c_address=0x30)
 	tof.open()
 	tof.start_ranging(VL53L0X.Vl53l0xAccuracyMode.BETTER)
 

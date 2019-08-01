@@ -29,12 +29,16 @@ def distance():
 if __name__ == '__main__':
 	pub = rospy.Publisher('distancia', Float64, queue_size=1) #criacao de um publicador no topico distancia
 	rospy.init_node('rangesensor', anonymous=True) #inicializacao do node rangesensor
-	rate = rospy.Rate(1) #rate para execucao dos comandos do ROS
+#	rate = rospy.Rate(1) #rate para execucao dos comandos do ROS
 	try:
 		while True:
 			dist = distance() #le o valor do ultrassom e coloca o valor na variavel dist
+			if(dist < 30):
+				print("T")
+			else:
+				print("F")
 			pub.publish(dist) #publica a distancia no topico distancia
-			time.sleep(0.0001)
+			time.sleep(0.01)
 	except rospy.ROSInterruptException:
 		print("finalizado")
 		GPIO.cleanup()
