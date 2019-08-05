@@ -42,18 +42,13 @@ cont1 = 0
 def parafrente():
     forwardDrive()
     inicio  = cont1
-    start = time.time()
-    #giros = Float32()
-    while time.time() < start +1:
-	news = time.time()
 	while (encoder1.value == 0):
 		pub.publish(msg)
-       	global cont1
-    	cont1 = cont1 +1
+    global cont1
+    cont1 = cont1 +1
 	msg.data = cont1
 	pub.publish(msg)
-	news = time.time()
-    	while(encoder1.value == 1):
+    while(encoder1.value == 1):
 		pub.publish(msg)
 	
 def main():

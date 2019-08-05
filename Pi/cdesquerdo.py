@@ -70,30 +70,38 @@ def parafrente(data):
 	else:
 		reverseDrive()
     inicio  = cont1
-    start = time.time()
     #giros = Float32()
-    while time.time() < start +1:
-	news = time.time()
 	while (encoder1.value == 0):
 		pub.publish(msg)
-       	global cont1
-		if(data):
-    		cont1 = cont1 +1
-		else:
-			cont1 = cont1 -1 
+    global cont1
+	if(data):
+    	cont1 = cont1 +1
+	else:
+		cont1 = cont1 -1 
 	msg.data = cont1
 	pub.publish(msg)
-	news = time.time()
-    	while(encoder1.value == 1):
+    while(encoder1.value == 1):
 		pub.publish(msg)
 	
 
 if __name__ == '__main__':
+	leituras = []
+	i = 0
     while True:
 		dist = distance()
-        if(dist < 15):
+		leituras.append(dist)
+		i = i +1
+		if(i==5):
+			leituras = sorted(leituras)
+        if (i < 5):
+			parafrente(True)
+		else if (leituras[2] < 15):
 			parafrente(False)
+			i = 0
+			del leituras[0:5]
 		else:
 			parafrente(True)
+			i=0
+			del leituras[0:5]
 allStop()
 GPIO.cleanup()
