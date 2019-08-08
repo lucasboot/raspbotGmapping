@@ -32,18 +32,18 @@ def distance():
 	time.sleep(0.00001) #set trigger apos 0,01ms
 	GPIO.output(GPIO_TRIGGER, False)
 
-    pulse_start = time.time()
-    timeout = pulse_start + maxTime
-    while GPIO.input(ECHO) == 0 and pulse_start < timeout:
         pulse_start = time.time()
-    pulse_end = time.time()
-    timeout = pulse_end + maxTime
-    while GPIO.input(ECHO) == 1 and pulse_end < timeout:
+        timeout = pulse_start + maxTime
+        while GPIO.input(GPIO_ECHO) == 0 and pulse_start < timeout:
+        	pulse_start = time.time()
         pulse_end = time.time()
+    	timeout = pulse_end + maxTime
+   	while GPIO.input(GPIO_ECHO) == 1 and pulse_end < timeout:
+        	pulse_end = time.time()
 
-    pulse_duration = pulse_end - pulse_start
-    distance = pulse_duration * 17000
-    distance = round(distance, 2)
+    	pulse_duration = pulse_end - pulse_start
+    	distance = pulse_duration * 17000
+    	distance = round(distance, 2)
 	return distance
 
 ####################################################################################

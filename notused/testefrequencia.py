@@ -49,15 +49,16 @@ value = 0
 while (value<=20):
     value2=(float(value)-10)/10 
     myServo.value=value2
-    print("Servo value set to "+str(value2))
+    #print("Servo value set to "+str(value2))
     distance = tof.get_distance()
+    print(distance)
     if distance > 0:
         #print("%d mm, %d cm, %d" % (distance, (distance/10), count))
         cont = cont + 1
     value = value + 0.1
     time.sleep(timing/1000000.00)
     
-print(str(cont) + " leituras realizadas")
+#print(str(cont) + " leituras realizadas")
 tof.stop_ranging()
 tof.close()
 
