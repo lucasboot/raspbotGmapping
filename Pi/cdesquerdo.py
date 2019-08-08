@@ -14,8 +14,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO_TRIGGER = 23 
 GPIO_ECHO = 24
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
+maxTime = 0.04
+
 
 # Motor B, Right Side GPIO CONSTANTS
 PWM_FORWARD_RIGHT_PIN = 6	# GPIO06 
@@ -25,17 +25,25 @@ forwardRight = PWMOutputDevice(PWM_FORWARD_RIGHT_PIN, True, 0, 1000)
 reverseRight = PWMOutputDevice(PWM_REVERSE_RIGHT_PIN, True, 0, 1000)
 
 def distance():
+	GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+	GPIO.setup(GPIO_ECHO, GPIO.IN)
+	
 	GPIO.output(GPIO_TRIGGER, True)
 	time.sleep(0.00001) #set trigger apos 0,01ms
 	GPIO.output(GPIO_TRIGGER, False)
-	StartTime = time.time()
-	StopTime = time.time()
-	while GPIO.input(GPIO_ECHO) == 0:
-		StartTime = time.time()
-	while GPIO.input(GPIO_ECHO) == 1:
-		StopTime = time.time()
-	TimeElapsed = StopTime - StartTime
-	distance = (TimeElapsed*34300)/2 #formula para obtencao da distancia
+
+    pulse_start = time.time()
+    timeout = pulse_start + maxTime
+    while GPIO.input(ECHO) == 0 and pulse_start < timeout:
+        pulse_start = time.time()
+    pulse_end = time.time()
+    timeout = pulse_end + maxTime
+    while GPIO.input(ECHO) == 1 and pulse_end < timeout:
+        pulse_end = time.time()
+
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17000
+    distance = round(distance, 2)
 	return distance
 
 ####################################################################################
