@@ -11,11 +11,13 @@ import math
 #Configurando o servo motor
 
 #####################
+'''
 myGPIO=17 #5V e GND
 myCorrection=0.45
 maxPW=(2.0+myCorrection)/1000
 minPW=(1.0-myCorrection)/1000
 myServo = Servo(myGPIO,min_pulse_width=minPW,max_pulse_width=maxPW)
+'''
 #####################
 
 if __name__ == '__main__':
@@ -59,7 +61,7 @@ if __name__ == '__main__':
 				#value = 3.0
 				#value2=(float(value)-10)/10.0 
                                 #myServo.value=value2 
-				print(value) 
+				#print(value) 
 				sleep(0.000001)
 	except rospy.ROSInterruptException:
 			GPIO.cleanup()
