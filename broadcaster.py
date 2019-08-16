@@ -20,7 +20,7 @@ if __name__ == '__main__':
         rotation_quaternion = tf.transformations.quaternion_from_euler(0.2, 0.3, 0.1)
 
         #translation vector
-        translation_vector = (1.0, 2.0, 3.0)
+        translation_vector = (0.08, 0.08, 0.08)
 
         #time
         current_time = rospy.Time.now()
