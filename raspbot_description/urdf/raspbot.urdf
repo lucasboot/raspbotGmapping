@@ -87,7 +87,7 @@
     </link>
  
     <joint name = 'r_wheel_joint' type ='continuous'>
-        <parent link = 'base'/>
+        <parent link = 'base_link'/>
         <child link = 'r_wheel'/>
         <origin xyz = '0.1625 0 -0.2525' rpy = '0 1.57 0'/>
          <limit effort="0.1" velocity="0.01"/>
@@ -116,6 +116,14 @@
                 <cylinder radius = '0.05' length ='0.022'/>
             </geometry>
         </visual>
+    <joint name = 'l_wheel_joint' type ='continuous'>
+        <parent link = 'base_link'/>
+        <child link = 'l_wheel'/>
+        <origin xyz = '-0.1625 0 -0.2525' rpy = '0 1.57 0'/>
+        <limit effort="0.1" velocity="0.01"/>
+        <axis xyz ='0 0 1'/>
+    </joint>
+
     </link>
      <collision name="caster_front_collision">
       <origin rpy=" 0 0 0" xyz="0.35 0 -0.05"/>
@@ -141,14 +149,7 @@
     </visual>
     </link>
  
-    <joint name = 'l_wheel_joint' type ='continuous'>
-        <parent link = 'base_link'/>
-        <child link = 'l_wheel'/>
-        <origin xyz = '-0.1625 0 -0.2525' rpy = '0 1.57 0'/>
-        <limit effort="0.1" velocity="0.01"/>
-        <axis xyz ='0 0 1'/>
-    </joint>
-
+   
 
   <link name="base_scan">
     <inertial>
