@@ -87,4 +87,6 @@ ROS SERVER
 source ~/catkin_ws/devel/setup.bash
 
 rosrun gmapping slam_gmapping scan:=laser
+rosrun  map_server map_saver -f ~/my_map
+
 
