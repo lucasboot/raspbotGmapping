@@ -118,65 +118,49 @@ if __name__=="__main__":
     while(a):
         key = getKey()
         if key == 'w' :
-	  cd1 = encoder1.value
-	  cd2 = encoder2.value
-	  forwardDrive()
+	        forwardDrive()
           global cont1
           global cont2
-          cont1 = cont1 +1
-          cont2 = cont2 +1 
-          msg.data = cont1
-          msg2.data = cont2
-          pub.publish(msg)
-          pub2.publish(msg2)
+          for i in range (4):
+             cont1 = cont1 +1
+             cont2 = cont2 +1 
+             msg.data = cont1
+             msg2.data = cont2
+             pub.publish(msg)
+             pub2.publish(msg2)
         elif key == 'q' :
           reverseDrive()
           global cont1
           global cont2
-          while (encoder1.value == 0 or encoder2.value == 0):
-	    pub.publish(msg)
-            pub2.publish(msg2)
-          cont1 = cont1 +1
-          cont2 = cont2 -1 
-          msg.data = cont1
-          msg2.data = cont2
-          pub.publish(msg)
-          pub2.publish(msg2)
-          while (encoder1.value == 1 or encoder2.value == 1):
-	          pub.publish(msg)
-            	  pub2.publish(msg2)
+          for i in range (4):
+             cont1 = cont1 -1
+             cont2 = cont2 +1 
+             msg.data = cont1
+             msg2.data = cont2
+             pub.publish(msg)
+             pub2.publish(msg2)
         elif key == 'e' :
           reverseDDrive()
           global cont1
           global cont2
-          while (encoder1.value == 0 or encoder2.value == 0):
-	          pub.publish(msg)
-            	  pub2.publish(msg2)
-          cont1 = cont1 -1
-          cont2 = cont2 +1 
-          msg.data = cont1
-          msg2.data = cont2
-          pub.publish(msg)
-          pub2.publish(msg2)
-          while (encoder1.value == 1 or encoder2.value == 1):
-	          pub.publish(msg)
-            	  pub2.publish(msg2)
+          for i in range (4):
+             cont1 = cont1 -1
+             cont2 = cont2 +1 
+             msg.data = cont1
+             msg2.data = cont2
+             pub.publish(msg)
+             pub2.publish(msg2)
         elif key == 's' :
           backwardDrive()
           global cont1
           global cont2
-          while (encoder1.value == 0 or encoder2.value == 0):
-	          pub.publish(msg)
-            	  pub2.publish(msg2)
-          cont1 = cont1 -1
-          cont2 = cont2 -1 
-          msg.data = cont1
-          msg2.data = cont2
-          pub.publish(msg)
-          pub2.publish(msg2)
-          while (encoder1.value == 1 or encoder2.value == 1):
-	          pub.publish(msg)
-            	  pub2.publish(msg2)
+          for i in range (4):
+             cont1 = cont1 -1
+             cont2 = cont2 -1 
+             msg.data = cont1
+             msg2.data = cont2
+             pub.publish(msg)
+             pub2.publish(msg2)
 	elif key == 'l':
 		a = False
         else: #parado
