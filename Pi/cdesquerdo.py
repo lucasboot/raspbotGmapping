@@ -102,10 +102,12 @@ if __name__ == '__main__':
 		leituras = sorted(leituras)
         if (i < 9):
 		parafrente(booleana)
-	elif (leituras[4] < 5):
+	elif (leituras[4] < 15):
 		print(leituras[4])
 		booleana = False
-		parafrente(booleana)
+		start = time.time()
+        while time.time() < start +2:
+			parafrente(booleana)
 		i = 0
 		del leituras[:]
 	else:
