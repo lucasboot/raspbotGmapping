@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-
-
 from gpiozero import DigitalInputDevice
 from gpiozero import PWMOutputDevice
 from std_msgs.msg import Int16
@@ -8,6 +6,8 @@ from std_msgs.msg import Float32
 import time
 import rospy
 import sys, select, os
+import RPi.GPIO as GPIO  
+GPIO.setmode(GPIO.BCM) 
 if os.name == 'nt':
   import msvcrt
 else:
@@ -110,6 +110,17 @@ pub2 = rospy.Publisher('rwheel', Int16, queue_size=1)
 encoder2 = DigitalInputDevice(21)
 cont2 = 0
 
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)  
+GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+
+def my_callback(channel):  
+    print "falling edge detected on 17"  
+  
+def my_callback2(channel):  
+    print "falling edge detected on 23" 
+
+GPIO.add_event_detect(20, GPIO.BOTH, callback=my_callback, bouncetime=300)  
+GPIO.add_event_detect(21, GPIO.BOTH, callback=my_callback2, bouncetime=300)
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)

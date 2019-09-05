@@ -19,20 +19,28 @@ print("Timing %d ms" % (timing/1000))
 start = time.time()
 cont = 0
 value = 3.0
+for i in range(3:0.3:17):
+    arq.write(str((((math.pi*0.3)/20)*180)/math.pi))
+    arq.write(" ")
+arq.write("\n")
+if os.name != 'nt':
+    settings = termios.tcgetattr(sys.stdin)
 while True:
+    key = getKey()
+    if (key == 'g' ): 
+		break
     distance = tof.get_distance()
     value2=(float(value)-10)/10.0 
     myServo.value=value2
 	value = value + 0.3 
-    if distance > 0:
-        print(distance/10)
-        time.sleep(timing/1000000.00)
-print (cont)
+    arq.write(str(distance))
+    time.sleep(timing/1000000.00)
+    if(value >= 17.0):
+        value = 3.0
+        arq.write("\n")
+arq.close()
 tof.stop_ranging()
 tof.close()
-
-
-
 '''
     
     cont = 0
